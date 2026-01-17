@@ -1,0 +1,1 @@
+CPPTRAJ trajectory file
