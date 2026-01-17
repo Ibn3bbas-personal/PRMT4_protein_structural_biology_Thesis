@@ -1,0 +1,7 @@
+initial minnmization of solvent+ions
+ &cntrl
+ imin = 1, maxcyc = 1000, ncyc = 500, ntr = 1,
+ ntpr = 50, cut = 9.0, restraintmask='!:WAT& :1-652@CA,C,O,N,S',restraint_wt=10.0,
+/
+
+END

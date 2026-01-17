@@ -1,0 +1,7 @@
+minimization whole system
+ &cntrl
+  imin = 1, maxcyc = 1000, ncyc =500,
+  cut = 9.0, ntr = 0,
+ /
+
+END

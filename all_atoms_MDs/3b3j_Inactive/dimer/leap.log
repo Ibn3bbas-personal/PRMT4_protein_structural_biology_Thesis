@@ -1,0 +1,749 @@
+log started: Fri Jun  7 17:28:52 2024
+
+Log file: ./leap.log
+>> #
+>> # ----- leaprc for loading the ff14SB force field
+>> # ----- NOTE: this is designed for PDB format 3!
+>> #
+>> #	load atom type hybridizations
+>> #
+>> addAtomTypes {
+>> 	{ "H"   "H" "sp3" }
+>> 	{ "HO"  "H" "sp3" }
+>> 	{ "HS"  "H" "sp3" }
+>> 	{ "H1"  "H" "sp3" }
+>> 	{ "H2"  "H" "sp3" }
+>> 	{ "H3"  "H" "sp3" }
+>> 	{ "H4"  "H" "sp3" }
+>> 	{ "H5"  "H" "sp3" }
+>> 	{ "HW"  "H" "sp3" }
+>> 	{ "HC"  "H" "sp3" }
+>> 	{ "HA"  "H" "sp3" }
+>> 	{ "HP"  "H" "sp3" }
+>> 	{ "HZ"  "H" "sp3" }
+>> 	{ "OH"  "O" "sp3" }
+>> 	{ "OS"  "O" "sp3" }
+>> 	{ "O"   "O" "sp2" }
+>> 	{ "O2"  "O" "sp2" }
+>> 	{ "OP"  "O" "sp2" }
+>> 	{ "OW"  "O" "sp3" }
+>> 	{ "CT"  "C" "sp3" }
+>> 	{ "CX"  "C" "sp3" }
+>> 	{ "C8"  "C" "sp3" }
+>> 	{ "2C"  "C" "sp3" }
+>> 	{ "3C"  "C" "sp3" }
+>> 	{ "CH"  "C" "sp3" }
+>> 	{ "CS"  "C" "sp2" }
+>> 	{ "C"   "C" "sp2" }
+>> 	{ "CO"   "C" "sp2" }
+>> 	{ "C*"  "C" "sp2" }
+>> 	{ "CA"  "C" "sp2" }
+>> 	{ "CB"  "C" "sp2" }
+>> 	{ "CC"  "C" "sp2" }
+>> 	{ "CN"  "C" "sp2" }
+>> 	{ "CM"  "C" "sp2" }
+>> 	{ "CK"  "C" "sp2" }
+>> 	{ "CQ"  "C" "sp2" }
+>> 	{ "CD"  "C" "sp2" }
+>> 	{ "C5"  "C" "sp2" }
+>> 	{ "C4"  "C" "sp2" }
+>> 	{ "CP"  "C" "sp2" }
+>> 	{ "CI"  "C" "sp3" }
+>> 	{ "CJ"  "C" "sp2" }
+>> 	{ "CW"  "C" "sp2" }
+>> 	{ "CV"  "C" "sp2" }
+>> 	{ "CR"  "C" "sp2" }
+>> 	{ "CA"  "C" "sp2" }
+>> 	{ "CY"  "C" "sp2" }
+>> 	{ "C0"  "Ca" "sp3" }
+>> 	{ "MG"  "Mg" "sp3" }
+>> 	{ "N"   "N" "sp2" }
+>> 	{ "NA"  "N" "sp2" }
+>> 	{ "N2"  "N" "sp2" }
+>> 	{ "N*"  "N" "sp2" }
+>> 	{ "NP"  "N" "sp2" }
+>> 	{ "NQ"  "N" "sp2" }
+>> 	{ "NB"  "N" "sp2" }
+>> 	{ "NC"  "N" "sp2" }
+>> 	{ "NT"  "N" "sp3" }
+>> 	{ "NY"  "N" "sp2" }
+>> 	{ "N3"  "N" "sp3" }
+>> 	{ "S"   "S" "sp3" }
+>> 	{ "SH"  "S" "sp3" }
+>> 	{ "P"   "P" "sp3" }
+>> 	{ "LP"  ""  "sp3" }
+>> 	{ "EP"  ""  "sp3" }
+>> 	{ "F"   "F" "sp3" }
+>> 	{ "Cl"  "Cl" "sp3" }
+>> 	{ "Br"  "Br" "sp3" }
+>> 	{ "I"   "I"  "sp3" }
+>> }
+>> #
+>> #	Load the main parameter set.
+>> #
+>> parm10 = loadamberparams parm10.dat
+Loading parameters: /mnt/c/Installers/amber22/dat/leap/parm/parm10.dat
+Reading title:
+PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA
+>> frcmod14SB = loadamberparams frcmod.ff14SB
+Loading parameters: /mnt/c/Installers/amber22/dat/leap/parm/frcmod.ff14SB
+Reading force field modification type file (frcmod)
+Reading title:
+ff14SB protein backbone and sidechain parameters
+>> #
+>> #	Load main chain and terminating amino acid libraries
+>> #
+>> loadOff amino12.lib
+Loading library: /mnt/c/Installers/amber22/dat/leap/lib/amino12.lib
+Loading: ALA
+Loading: ARG
+Loading: ASH
+Loading: ASN
+Loading: ASP
+Loading: CYM
+Loading: CYS
+Loading: CYX
+Loading: GLH
+Loading: GLN
+Loading: GLU
+Loading: GLY
+Loading: HID
+Loading: HIE
+Loading: HIP
+Loading: HYP
+Loading: ILE
+Loading: LEU
+Loading: LYN
+Loading: LYS
+Loading: MET
+Loading: PHE
+Loading: PRO
+Loading: SER
+Loading: THR
+Loading: TRP
+Loading: TYR
+Loading: VAL
+>> loadOff aminoct12.lib
+Loading library: /mnt/c/Installers/amber22/dat/leap/lib/aminoct12.lib
+Loading: CALA
+Loading: CARG
+Loading: CASN
+Loading: CASP
+Loading: CCYS
+Loading: CCYX
+Loading: CGLN
+Loading: CGLU
+Loading: CGLY
+Loading: CHID
+Loading: CHIE
+Loading: CHIP
+Loading: CHYP
+Loading: CILE
+Loading: CLEU
+Loading: CLYS
+Loading: CMET
+Loading: CPHE
+Loading: CPRO
+Loading: CSER
+Loading: CTHR
+Loading: CTRP
+Loading: CTYR
+Loading: CVAL
+Loading: NHE
+Loading: NME
+>> loadOff aminont12.lib
+Loading library: /mnt/c/Installers/amber22/dat/leap/lib/aminont12.lib
+Loading: ACE
+Loading: NALA
+Loading: NARG
+Loading: NASN
+Loading: NASP
+Loading: NCYS
+Loading: NCYX
+Loading: NGLN
+Loading: NGLU
+Loading: NGLY
+Loading: NHID
+Loading: NHIE
+Loading: NHIP
+Loading: NILE
+Loading: NLEU
+Loading: NLYS
+Loading: NMET
+Loading: NPHE
+Loading: NPRO
+Loading: NSER
+Loading: NTHR
+Loading: NTRP
+Loading: NTYR
+Loading: NVAL
+>> 
+>> #
+>> #	Define the PDB name map for the amino acids
+>> #
+>> addPdbResMap {
+>>   { 0 "HYP" "HYP" } { 1 "HYP" "CHYP" }
+>>   { 0 "ALA" "NALA" } { 1 "ALA" "CALA" }
+>>   { 0 "ARG" "NARG" } { 1 "ARG" "CARG" }
+>>   { 0 "ASN" "NASN" } { 1 "ASN" "CASN" }
+>>   { 0 "ASP" "NASP" } { 1 "ASP" "CASP" }
+>>   { 0 "CYS" "NCYS" } { 1 "CYS" "CCYS" }
+>>   { 0 "CYX" "NCYX" } { 1 "CYX" "CCYX" }
+>>   { 0 "GLN" "NGLN" } { 1 "GLN" "CGLN" }
+>>   { 0 "GLU" "NGLU" } { 1 "GLU" "CGLU" }
+>>   { 0 "GLY" "NGLY" } { 1 "GLY" "CGLY" }
+>>   { 0 "HID" "NHID" } { 1 "HID" "CHID" }
+>>   { 0 "HIE" "NHIE" } { 1 "HIE" "CHIE" }
+>>   { 0 "HIP" "NHIP" } { 1 "HIP" "CHIP" }
+>>   { 0 "ILE" "NILE" } { 1 "ILE" "CILE" }
+>>   { 0 "LEU" "NLEU" } { 1 "LEU" "CLEU" }
+>>   { 0 "LYS" "NLYS" } { 1 "LYS" "CLYS" }
+>>   { 0 "MET" "NMET" } { 1 "MET" "CMET" }
+>>   { 0 "PHE" "NPHE" } { 1 "PHE" "CPHE" }
+>>   { 0 "PRO" "NPRO" } { 1 "PRO" "CPRO" }
+>>   { 0 "SER" "NSER" } { 1 "SER" "CSER" }
+>>   { 0 "THR" "NTHR" } { 1 "THR" "CTHR" }
+>>   { 0 "TRP" "NTRP" } { 1 "TRP" "CTRP" }
+>>   { 0 "TYR" "NTYR" } { 1 "TYR" "CTYR" }
+>>   { 0 "VAL" "NVAL" } { 1 "VAL" "CVAL" }
+>>   { 0 "HIS" "NHIS" } { 1 "HIS" "CHIS" }
+>> }
+>> 
+>> #
+>> # assume that most often proteins use HIE
+>> #
+>> NHIS = NHIE
+>> HIS = HIE
+>> CHIS = CHIE
+> 
+> #load TIP3P (water) force field
+> source leaprc.water.tip3p
+
+/mnt/c/Installers/amber22/bin/teLeap: Note.
+A carriage return character has been read.
+This is an indicator of DOS line endings.
+Although LEaP treats it as whitespace, other programs may not.
+One can convert line endings from DOS to UNIX with various tools including:
+    dos2unix
+----- Source: /mnt/c/Installers/amber22/dat/leap/cmd/leaprc.water.tip3p
+----- Source of /mnt/c/Installers/amber22/dat/leap/cmd/leaprc.water.tip3p done
+>> #
+>> #       Load water and ions for TIP3P + Li/Merz monovalent ions 
+>> #       + Joung-Chetham monovalent ions
+>> #       + Li/Merz highly charged ions (+2 to +4, 12-6 normal usage set)
+>> #
+>> #       Note: the Li/Merz monovalent set is loaded only to get Tl+,
+>> #          Cu+, Ag+ NH4+, H3O+.  Since we load Joung-Cheatham second,
+>> #          the alkali halide parameters come from the Joung-Cheatham set
+>> #
+>> addAtomTypes {
+>> 	{ "HW"  "H" "sp3" }
+>> 	{ "OW"  "O" "sp3" }
+>> 	{ "F-"   "F" "sp3" }
+>> 	{ "Cl-"  "Cl" "sp3" }
+>> 	{ "Br-"  "Br" "sp3" }
+>> 	{ "I-"   "I"  "sp3" }
+>> 	{ "Li+"  "Li"  "sp3" }
+>> 	{ "Na+"  "Na"  "sp3" }
+>> 	{ "K+"  "K"  "sp3" }
+>> 	{ "Rb+"  "Rb"  "sp3" }
+>> 	{ "Cs+"  "Cs"  "sp3" }
+>> 	{ "Mg+"  "Mg"  "sp3" }
+>>     { "Tl+"  "Tl"  "sp3" }
+>>     { "Cu+"  "Cu"  "sp3" }
+>>     { "Ag+"  "Ag"  "sp3" }
+>>     { "NH4+"  "N"  "sp3" }
+>>     { "H3O+"  "O"  "sp3" }
+>>     { "Be2+" "Be"  "sp3" }
+>>     { "Cu2+" "Cu"  "sp3" }
+>>     { "Ni2+" "Ni"  "sp3" }
+>>     { "Pt2+" "Pt"  "sp3" }
+>>     { "Zn2+" "Zn"  "sp3" }
+>>     { "Co2+" "Co"  "sp3" }
+>>     { "Pd2+" "Pd"  "sp3" }
+>>     { "Ag2+" "Ag"  "sp3" }
+>>     { "Cr2+" "Cr"  "sp3" }
+>>     { "Fe2+" "Fe"  "sp3" }
+>>     { "Mg2+" "Mg"  "sp3" }
+>>     { "V2+"  "V"   "sp3" }
+>>     { "Mn2+" "Mn"  "sp3" }
+>>     { "Hg2+" "Hg"  "sp3" }
+>>     { "Cd2+" "Cd"  "sp3" }
+>>     { "Yb2+" "Yb"  "sp3" }
+>>     { "Ca2+" "Ca"  "sp3" }
+>>     { "Sn2+" "Sn"  "sp3" }
+>>     { "Pb2+" "Pb"  "sp3" }
+>>     { "Eu2+" "Eu"  "sp3" }
+>>     { "Sr2+" "Sr"  "sp3" }
+>>     { "Sm2+" "Sm"  "sp3" }
+>>     { "Ba2+" "Ba"  "sp3" }
+>>     { "Ra2+" "Ra"  "sp3" }
+>>     { "Al3+" "Al"  "sp3" }
+>>     { "Fe3+" "Fe"  "sp3" }
+>>     { "Cr3+" "Cr"  "sp3" }
+>>     { "In3+" "In"  "sp3" }
+>>     { "Tl3+" "Tl"  "sp3" }
+>>     { "Y3+"  "Y"   "sp3" }
+>>     { "La3+" "La"  "sp3" }
+>>     { "Ce3+" "Ce"  "sp3" }
+>>     { "Pr3+" "Pr"  "sp3" }
+>>     { "Nd3+" "Nd"  "sp3" }
+>>     { "Sm3+" "Sm"  "sp3" }
+>>     { "Eu3+" "Eu"  "sp3" }
+>>     { "Gd3+" "Gd"  "sp3" }
+>>     { "Tb3+" "Tb"  "sp3" }
+>>     { "Dy3+" "Dy"  "sp3" }
+>>     { "Er3+" "Er"  "sp3" }
+>>     { "Tm3+" "Tm"  "sp3" }
+>>     { "Lu3+" "Lu"  "sp3" }
+>>     { "Hf4+" "Hf"  "sp3" }
+>>     { "Zr4+" "Zr"  "sp3" }
+>>     { "Ce4+" "Ce"  "sp3" }
+>>     { "U4+"  "U"   "sp3" }
+>>     { "Pu4+" "Pu"  "sp3" }
+>>     { "Th4+" "Th"  "sp3" }
+>> }
+>> loadOff atomic_ions.lib
+Loading library: /mnt/c/Installers/amber22/dat/leap/lib/atomic_ions.lib
+Loading: AG
+Loading: AL
+Loading: Ag
+Loading: BA
+Loading: BR
+Loading: Be
+Loading: CA
+Loading: CD
+Loading: CE
+Loading: CL
+Loading: CO
+Loading: CR
+Loading: CS
+Loading: CU
+Loading: CU1
+Loading: Ce
+Loading: Cl-
+Loading: Cr
+Loading: Dy
+Loading: EU
+Loading: EU3
+Loading: Er
+Loading: F
+Loading: FE
+Loading: FE2
+Loading: GD3
+Loading: H3O+
+Loading: HE+
+Loading: HG
+Loading: HZ+
+Loading: Hf
+Loading: IN
+Loading: IOD
+Loading: K
+Loading: K+
+Loading: LA
+Loading: LI
+Loading: LU
+Loading: MG
+Loading: MN
+Loading: NA
+Loading: NH4
+Loading: NI
+Loading: Na+
+Loading: Nd
+Loading: PB
+Loading: PD
+Loading: PR
+Loading: PT
+Loading: Pu
+Loading: RB
+Loading: Ra
+Loading: SM
+Loading: SR
+Loading: Sm
+Loading: Sn
+Loading: TB
+Loading: TL
+Loading: Th
+Loading: Tl
+Loading: Tm
+Loading: U4+
+Loading: V2+
+Loading: Y
+Loading: YB2
+Loading: ZN
+Loading: Zr
+>> loadOff solvents.lib
+Loading library: /mnt/c/Installers/amber22/dat/leap/lib/solvents.lib
+Loading: CHCL3BOX
+Loading: DC4
+Loading: FB3
+Loading: FB3BOX
+Loading: FB4
+Loading: FB4BOX
+Loading: MEOHBOX
+Loading: NMABOX
+Loading: O3P
+Loading: OP3
+Loading: OPC
+Loading: OPC3BOX
+Loading: OPC3POLBOX
+Loading: OPCBOX
+Loading: PL3
+Loading: POL3BOX
+Loading: QSPCFWBOX
+Loading: SPC
+Loading: SPCBOX
+Loading: SPCFWBOX
+Loading: SPF
+Loading: SPG
+Loading: T4E
+Loading: TIP3PBOX
+Loading: TIP3PFBOX
+Loading: TIP4PBOX
+Loading: TIP4PEWBOX
+Loading: TIP5PBOX
+Loading: TP3
+Loading: TP4
+Loading: TP5
+Loading: TPF
+>> HOH = TP3
+>> WAT = TP3
+>> loadAmberParams frcmod.tip3p
+Loading parameters: /mnt/c/Installers/amber22/dat/leap/parm/frcmod.tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+This is the additional/replacement parameter set for TIP3P water
+>> loadAmberParams frcmod.ions1lm_126_tip3p
+Loading parameters: /mnt/c/Installers/amber22/dat/leap/parm/frcmod.ions1lm_126_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Li/Merz ion parameters of monovalent ions for TIP3P water model (12-6 normal usage set)
+>> loadAmberParams frcmod.ionsjc_tip3p
+Loading parameters: /mnt/c/Installers/amber22/dat/leap/parm/frcmod.ionsjc_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Monovalent ion parameters for Ewald and TIP3P water from Joung & Cheatham JPCB (2008)
+>> loadAmberParams frcmod.ions234lm_126_tip3p
+Loading parameters: /mnt/c/Installers/amber22/dat/leap/parm/frcmod.ions234lm_126_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Li/Merz ion parameters of divalent to tetravalent ions for TIP3P water model (12-6 normal usage set)
+>> 
+> 
+> #load ions frcmod for the tip3p model
+> loadamberparams frcmod.ionsjc_tip3p
+
+/mnt/c/Installers/amber22/bin/teLeap: Note.
+A carriage return character has been read.
+This is an indicator of DOS line endings.
+Although LEaP treats it as whitespace, other programs may not.
+One can convert line endings from DOS to UNIX with various tools including:
+    dos2unix
+Loading parameters: /mnt/c/Installers/amber22/dat/leap/parm/frcmod.ionsjc_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Monovalent ion parameters for Ewald and TIP3P water from Joung & Cheatham JPCB (2008)
+> #load protein pdb file
+> protein = loadpdb ../structure/3b3j_dimer_protonated7_amber.pdb
+
+/mnt/c/Installers/amber22/bin/teLeap: Note.
+A carriage return character has been read.
+This is an indicator of DOS line endings.
+Although LEaP treats it as whitespace, other programs may not.
+One can convert line endings from DOS to UNIX with various tools including:
+    dos2unix
+Loading PDB file: ../structure/3b3j_dimer_protonated7_amber.pdb
+Matching PDB residue names to LEaP variables.
+Mapped residue PHE, term: Terminal/beginning, seq. number: 0 to: NPHE.
+Mapped residue THR, term: Terminal/last, seq. number: 325 to: CTHR.
+Mapped residue PHE, term: Terminal/beginning, seq. number: 326 to: NPHE.
+Mapped residue THR, term: Terminal/last, seq. number: 651 to: CTHR.
+  total atoms in file: 10390
+> #solvate the system
+> solvateoct protein TIP3PBOX 10.0
+
+/mnt/c/Installers/amber22/bin/teLeap: Note.
+A carriage return character has been read.
+This is an indicator of DOS line endings.
+Although LEaP treats it as whitespace, other programs may not.
+One can convert line endings from DOS to UNIX with various tools including:
+    dos2unix
+Scaling up box by a factor of 1.284754 to meet diagonal cut criterion
+  Solute vdw bounding box:              51.320 87.579 81.966
+  Total bounding box for atom centers:  113.274 113.274 113.274
+      (box expansion for 'iso' is  54.7%)
+  Solvent unit box:                     18.774 18.774 18.774
+The number of boxes:  x= 7  y= 7  z= 7
+  Volume: 746124.268 A^3 (oct)
+  Total mass 404258.692 amu,  Density 0.900 g/cc
+  Added 18329 residues.
+> #Neutralize system
+> addions protein Na+ 0
+
+/mnt/c/Installers/amber22/bin/teLeap: Note.
+A carriage return character has been read.
+This is an indicator of DOS line endings.
+Although LEaP treats it as whitespace, other programs may not.
+One can convert line endings from DOS to UNIX with various tools including:
+    dos2unix
+
+/mnt/c/Installers/amber22/bin/teLeap: Warning!
+addIons: 1st Ion & target unit have charges of the same sign:
+     unit charge = 2; ion1 charge = 1;
+     can't neutralize.
+> addions protein Cl- 0
+
+/mnt/c/Installers/amber22/bin/teLeap: Note.
+A carriage return character has been read.
+This is an indicator of DOS line endings.
+Although LEaP treats it as whitespace, other programs may not.
+One can convert line endings from DOS to UNIX with various tools including:
+    dos2unix
+2 Cl- ions required to neutralize.
+Adding 2 counter ions to "protein" using 1A grid
+Total solute charge:   2.00  Max atom radius:   2.00
+Grid extends from solute vdw + 2.51  to  8.51
+Box:
+   enclosing:  -52.96 -47.54 -45.66   44.23 43.15 49.97
+   sized:			      75.04 80.46 82.34
+   edge:        128.00
+Resolution:      1.00 Angstrom.
+Tree depth: 7
+Volume =  5.58% of box, grid points 117091
+Solvent present: replacing closest with ion
+	 when steric overlaps occur
+Calculating grid charges
+(Replacing solvent molecule)
+Placed Cl- in protein at (6.00, -3.45, 3.67).
+(Replacing solvent molecule)
+Placed Cl- in protein at (12.39, 6.39, 10.16).
+
+Done adding ions.
+> #neutralize the system to prepare 150 mM salt solutio
+> addIonsRand protein Na+ 40 Cl- 40
+
+/mnt/c/Installers/amber22/bin/teLeap: Note.
+A carriage return character has been read.
+This is an indicator of DOS line endings.
+Although LEaP treats it as whitespace, other programs may not.
+One can convert line endings from DOS to UNIX with various tools including:
+    dos2unix
+Adding 80 counter ions to "protein". 18247 solvent molecules will remain.
+0: Placed Na+ in protein at (-21.83, 17.88, -9.76).
+Placed Cl- in protein at (7.84, -20.47, 49.25).
+0: Placed Na+ in protein at (15.38, -42.91, 21.74).
+Placed Cl- in protein at (47.82, 14.27, 3.50).
+0: Placed Na+ in protein at (19.75, 26.83, 12.32).
+Placed Cl- in protein at (11.01, 32.23, 36.79).
+0: Placed Na+ in protein at (26.29, 7.30, 38.37).
+Placed Cl- in protein at (16.90, 33.07, -7.02).
+0: Placed Na+ in protein at (-46.93, -33.52, 7.29).
+Placed Cl- in protein at (27.30, -32.21, 20.77).
+0: Placed Na+ in protein at (45.40, 9.10, -14.22).
+Placed Cl- in protein at (1.03, -18.93, 39.39).
+0: Placed Na+ in protein at (18.74, 11.40, 19.46).
+Placed Cl- in protein at (-5.96, 39.53, -16.02).
+0: Placed Na+ in protein at (4.30, -11.10, 32.34).
+Placed Cl- in protein at (44.90, -1.03, 2.52).
+0: Placed Na+ in protein at (-11.56, -55.77, 21.42).
+Placed Cl- in protein at (20.83, -35.47, -26.68).
+0: Placed Na+ in protein at (-26.52, 42.54, -22.88).
+Placed Cl- in protein at (-31.09, -14.01, 37.43).
+0: Placed Na+ in protein at (-9.75, 4.78, -12.48).
+Placed Cl- in protein at (15.29, 45.07, 16.11).
+0: Placed Na+ in protein at (-35.62, 4.11, -28.06).
+Placed Cl- in protein at (-32.26, 36.21, 12.49).
+0: Placed Na+ in protein at (16.10, -26.00, 17.80).
+Placed Cl- in protein at (-28.55, 10.11, -2.84).
+0: Placed Na+ in protein at (-26.99, 14.21, 43.61).
+Placed Cl- in protein at (39.95, -17.71, 22.68).
+0: Placed Na+ in protein at (-0.44, 3.88, -48.10).
+Placed Cl- in protein at (29.64, -14.50, 22.85).
+0: Placed Na+ in protein at (-33.55, 0.91, -11.62).
+Placed Cl- in protein at (38.00, 28.26, 0.29).
+0: Placed Na+ in protein at (-33.36, 2.86, -13.40).
+Placed Cl- in protein at (-26.21, -30.79, -0.79).
+0: Placed Na+ in protein at (17.80, 25.47, 2.38).
+Placed Cl- in protein at (-23.69, 39.44, -10.50).
+0: Placed Na+ in protein at (-17.22, 14.27, 56.60).
+Placed Cl- in protein at (11.78, 12.49, 39.25).
+0: Placed Na+ in protein at (-21.75, -23.36, 18.03).
+Placed Cl- in protein at (-1.22, -38.75, -27.85).
+0: Placed Na+ in protein at (12.45, -45.01, 18.13).
+Placed Cl- in protein at (-13.53, 1.35, -46.74).
+0: Placed Na+ in protein at (1.09, 43.10, -25.76).
+Placed Cl- in protein at (-28.50, 39.62, 3.85).
+0: Placed Na+ in protein at (3.33, 48.53, -3.58).
+Placed Cl- in protein at (8.87, -8.94, 34.62).
+0: Placed Na+ in protein at (-16.30, -49.03, 9.95).
+Placed Cl- in protein at (35.29, 3.01, -33.44).
+0: Placed Na+ in protein at (24.40, -43.42, 19.27).
+Placed Cl- in protein at (-22.84, -34.73, -27.98).
+0: Placed Na+ in protein at (16.46, 19.41, 32.28).
+Placed Cl- in protein at (30.57, -28.65, 13.93).
+0: Placed Na+ in protein at (-12.17, -1.68, -37.03).
+Placed Cl- in protein at (-28.85, 14.84, 0.05).
+0: Placed Na+ in protein at (-31.70, 3.09, 48.48).
+Placed Cl- in protein at (-40.30, 9.04, -26.36).
+0: Placed Na+ in protein at (-28.55, 1.41, -36.71).
+Placed Cl- in protein at (19.75, -42.15, -27.51).
+0: Placed Na+ in protein at (-13.28, 29.22, -35.94).
+Placed Cl- in protein at (27.10, 3.60, 14.13).
+0: Placed Na+ in protein at (-1.93, -3.83, 38.87).
+Placed Cl- in protein at (-29.92, 20.56, -41.41).
+0: Placed Na+ in protein at (30.31, 27.22, 2.83).
+Placed Cl- in protein at (-31.06, -16.46, -14.24).
+0: Placed Na+ in protein at (7.50, 21.72, -20.88).
+Placed Cl- in protein at (31.76, -2.59, 19.05).
+0: Placed Na+ in protein at (2.25, -6.21, -27.70).
+Placed Cl- in protein at (-16.98, 11.16, -36.66).
+0: Placed Na+ in protein at (-23.18, 11.89, -11.24).
+Placed Cl- in protein at (7.50, -24.27, -47.43).
+0: Placed Na+ in protein at (40.63, 38.79, 6.09).
+Placed Cl- in protein at (7.99, -43.09, -25.24).
+0: Placed Na+ in protein at (-13.84, 17.85, -17.13).
+Placed Cl- in protein at (28.71, 43.34, 0.60).
+0: Placed Na+ in protein at (25.13, -29.83, 1.92).
+Placed Cl- in protein at (-8.59, 1.45, -40.98).
+0: Placed Na+ in protein at (-10.97, -30.02, 23.65).
+Placed Cl- in protein at (-43.88, 12.35, -11.10).
+0: Placed Na+ in protein at (24.07, -6.39, 27.76).
+Placed Cl- in protein at (-10.33, 30.34, 9.98).
+> ###check the system
+> charge protein
+
+/mnt/c/Installers/amber22/bin/teLeap: Note.
+A carriage return character has been read.
+This is an indicator of DOS line endings.
+Although LEaP treats it as whitespace, other programs may not.
+One can convert line endings from DOS to UNIX with various tools including:
+    dos2unix
+Total unperturbed charge:   0.000000
+Total perturbed charge:     0.000000
+> check protein
+
+/mnt/c/Installers/amber22/bin/teLeap: Note.
+A carriage return character has been read.
+This is an indicator of DOS line endings.
+Although LEaP treats it as whitespace, other programs may not.
+One can convert line endings from DOS to UNIX with various tools including:
+    dos2unix
+Checking 'protein'....
+
+/mnt/c/Installers/amber22/bin/teLeap: Warning!
+Close contact of 1.357 angstroms between nonbonded atoms OE1 and H
+-------  .R<GLU 92>.A<OE1 12> and .R<GLU 92>.A<H 2>
+
+/mnt/c/Installers/amber22/bin/teLeap: Warning!
+Close contact of 1.493 angstroms between nonbonded atoms OD2 and HH22
+-------  .R<ASP 148>.A<OD2 10> and .R<ARG 268>.A<HH22 22>
+
+/mnt/c/Installers/amber22/bin/teLeap: Warning!
+Close contact of 1.140 angstroms between nonbonded atoms HE21 and HZ3
+-------  .R<GLN 155>.A<HE21 14> and .R<LYS 158>.A<HZ3 20>
+
+/mnt/c/Installers/amber22/bin/teLeap: Warning!
+Close contact of 1.473 angstroms between nonbonded atoms HE22 and HB3
+-------  .R<GLN 164>.A<HE22 15> and .R<GLN 164>.A<HB3 7>
+
+/mnt/c/Installers/amber22/bin/teLeap: Warning!
+Close contact of 1.066 angstroms between nonbonded atoms O and H
+-------  .R<ASP 193>.A<O 12> and .R<ARG 195>.A<H 2>
+
+/mnt/c/Installers/amber22/bin/teLeap: Warning!
+Close contact of 1.376 angstroms between nonbonded atoms HB2 and H
+-------  .R<SER 296>.A<HB2 6> and .R<TYR 297>.A<H 2>
+
+/mnt/c/Installers/amber22/bin/teLeap: Warning!
+Close contact of 1.500 angstroms between nonbonded atoms HG22 and H
+-------  .R<VAL 417>.A<HG22 13> and .R<VAL 417>.A<H 2>
+
+/mnt/c/Installers/amber22/bin/teLeap: Warning!
+Close contact of 1.357 angstroms between nonbonded atoms OE1 and H
+-------  .R<GLU 418>.A<OE1 12> and .R<GLU 418>.A<H 2>
+
+/mnt/c/Installers/amber22/bin/teLeap: Warning!
+Close contact of 1.493 angstroms between nonbonded atoms OD2 and HH22
+-------  .R<ASP 474>.A<OD2 10> and .R<ARG 594>.A<HH22 22>
+
+/mnt/c/Installers/amber22/bin/teLeap: Warning!
+Close contact of 1.473 angstroms between nonbonded atoms HE22 and HB3
+-------  .R<GLN 490>.A<HE22 15> and .R<GLN 490>.A<HB3 7>
+
+/mnt/c/Installers/amber22/bin/teLeap: Warning!
+Close contact of 1.066 angstroms between nonbonded atoms O and H
+-------  .R<ASP 519>.A<O 12> and .R<ARG 521>.A<H 2>
+
+/mnt/c/Installers/amber22/bin/teLeap: Warning!
+Close contact of 1.376 angstroms between nonbonded atoms HB2 and H
+-------  .R<SER 622>.A<HB2 6> and .R<TYR 623>.A<H 2>
+Checking parameters for unit 'protein'.
+Checking for bond parameters.
+Checking for angle parameters.
+check:  Warnings: 12
+Unit is OK.
+> #write topology and coordinate files 
+> saveamberparm protein solvated_3b3j_dimer.parm7 solvated_3b3j_dimer.rst7
+
+/mnt/c/Installers/amber22/bin/teLeap: Note.
+A carriage return character has been read.
+This is an indicator of DOS line endings.
+Although LEaP treats it as whitespace, other programs may not.
+One can convert line endings from DOS to UNIX with various tools including:
+    dos2unix
+Checking Unit.
+Building topology.
+Building atom parameters.
+Building bond parameters.
+Building angle parameters.
+Building proper torsion parameters.
+Building improper torsion parameters.
+ total 2182 improper torsions applied
+Building H-Bond parameters.
+Incorporating Non-Bonded adjustments.
+Not Marking per-residue atom chain types.
+Marking per-residue atom chain types.
+  (Residues lacking connect0/connect1 - 
+   these don't have chain types marked:
+
+	res	total affected
+
+	CTHR	2
+	NPHE	2
+	WAT	18247
+  )
+ (no restraints)
+> savepdb protein solvated_3b3j_dimer.pdb
+
+/mnt/c/Installers/amber22/bin/teLeap: Note.
+A carriage return character has been read.
+This is an indicator of DOS line endings.
+Although LEaP treats it as whitespace, other programs may not.
+One can convert line endings from DOS to UNIX with various tools including:
+    dos2unix
+Writing pdb file: solvated_3b3j_dimer.pdb
+   printing CRYST1 record to PDB file with box info
+
+/mnt/c/Installers/amber22/bin/teLeap: Warning!
+ Converting N-terminal residue name to PDB format: NPHE -> PHE
+
+/mnt/c/Installers/amber22/bin/teLeap: Warning!
+ Converting C-terminal residue name to PDB format: CTHR -> THR
+
+/mnt/c/Installers/amber22/bin/teLeap: Warning!
+ Converting N-terminal residue name to PDB format: NPHE -> PHE
+
+/mnt/c/Installers/amber22/bin/teLeap: Warning!
+ Converting C-terminal residue name to PDB format: CTHR -> THR
+> #quit
+> quit
+
+/mnt/c/Installers/amber22/bin/teLeap: Note.
+A carriage return character has been read.
+This is an indicator of DOS line endings.
+Although LEaP treats it as whitespace, other programs may not.
+One can convert line endings from DOS to UNIX with various tools including:
+    dos2unix
+	Quit
+
+Exiting LEaP: Errors = 0; Warnings = 17; Notes = 13.
