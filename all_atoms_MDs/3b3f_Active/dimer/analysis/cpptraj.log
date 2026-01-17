@@ -1,0 +1,76 @@
+# 06/15/24 14:45:02
+parm ../tleap/solvated_3b3f_dimer.parm7
+trajin ../mdrun/3b3f_dimer_md250.mdcrd 1 last 10
+unwrap :1-652 
+center origin :1-652
+autoimage
+strip :WAT,Na+,Cl-
+rmsd :1-652&!@H= first perres perresavg range 1-652 perres out rmsd_byres_3b3f_dimer_400.dat
+rms all @N,CA,C first out 3b3f_dimer_all_rmsd400.dat
+rms pro :1-652&@N,CA,C first out 3b3f_dimer_pro_rmsd400.dat
+atomicfluct :1-652&!(@H=) out rmsf_3b3f_dimer_400.dat byres
+radgyr :1-652&!(@H=) out rog_3b3f_dimer_400.dat mass
+trajout aligned_3b3f_dimer_md400_ski10.mdcrd nobox
+run
+clear all
+parm ../tleap/solvated_3b3f_dimer.parm7
+parmstrip :WAT,Na+,Cl-
+parmwrite out stripped_3b3f_dimer.parm7
+clear all
+parm ../tleap/solvated_3b3f_dimer.parm7
+trajin ../mdrun/3b3f_dimer_md400.mdcrd 1 last 10
+unwrap :1-652 
+center origin :1-652
+autoimage
+strip :WAT,Na+,Cl-
+atomiccorr :1-652&!(@H=) out corr_3b3f_Dimer.dat byres
+rms first @N,C,CA
+average @N,C,CA crdset trajaverage3b3fDimer
+createcrd trajectory3b3fDimer
+run
+crdaction trajectory3b3fDimer rms ref trajaverage3b3fDimer @N,C,CA
+crdaction trajectory3b3fDimer matrix covar name covmatrix3b3fDimer @N,C,CA
+runanalysis diagmatrix covmatrix3b3fDimer out evecs3b3fDimer.dat vecs 10 name eigenvectors3b3fDimer 
+nmwiz nmwizvecs 10 nmwizfile normalmodes3b3fDimer.nmd nmwizmask @N,C,CA
+crdaction trajectory3b3fDimer projection modes eigenvectors3b3fDimer beg 1 end 10 @N,C,CA out pca3b3fDimer.dat crdframes 1,last
+quit
+# 06/15/24 15:04:28
+parm ../tleap/solvated_3b3f_dimer.parm7
+trajin ../mdrun/3b3f_dimer_md400.mdcrd 1 last 10
+unwrap :1-652 
+center origin :1-652
+autoimage
+strip :WAT,Na+,Cl-
+atomiccorr :1-652&!(@H=) out corr_3b3f_Dimer.dat byres
+rms first @N,C,CA
+average @N,C,CA crdset trajaverage3b3fDimer
+createcrd trajectory3b3fDimer
+run
+crdaction trajectory3b3fDimer rms ref trajaverage3b3fDimer @N,C,CA
+crdaction trajectory3b3fDimer matrix covar name covmatrix3b3fDimer @N,C,CA
+runanalysis diagmatrix covmatrix3b3fDimer out evecs3b3fDimer.dat vecs 10 name eigenvectors3b3fDimer 
+nmwiz nmwizvecs 10 nmwizfile normalmodes3b3fDimer.nmd nmwizmask @N,C,CA
+nmwiz -nmwizvecs 10 -nmwizfile normalmodes3b3fDimer.nmd -nmwizmask @N,C,CA
+# 06/15/24 15:26:20
+parm ../tleap/solvated_3b3f_dimer.parm7
+trajin ../mdrun/3b3f_dimer_md400.mdcrd 1 last 10
+unwrap :1-652 
+center origin :1-652
+autoimage
+strip :WAT,Na+,Cl-
+atomiccorr :1-652&!(@H=) out corr_3b3f_Dimer.dat byres
+rms first @N,C,CA
+average @N,C,CA crdset trajaverage3b3fDimer
+createcrd trajectory3b3fDimer
+run
+crdaction trajectory3b3fDimer rms ref trajaverage3b3fDimer @N,C,CA
+crdaction trajectory3b3fDimer matrix covar name covmatrix3b3fDimer @N,C,CA
+runanalysis diagmatrix covmatrix3b3fDimer out evecs3b3fDimer.dat vecs 10 name eigenvectors3b3fDimer nmwiz nmwizvecs 10 nmwizfile normalmodes3b3fDimer.nmd nmwizmask @N,C,CA
+crdaction trajectory3b3fDimer projection modes eigenvectors3b3fDimer beg 1 end 10 @N,C,CA out pca3b3fDimer.dat crdframes 1,last
+clear all
+readdata evecs3b3fDimer.dat name eigenvectors3b3fDimer
+parm stripped_3b3f_dimer.parm7
+parmwrite out 3b3fDimer.prmtop
+runanalysis modes name eigenvectors3b3fDimer trajout modes3b3fDimer.dcd pcmin -150 pcmax 150 tmode 1 trajoutmask @N,C,CA trajoutfmt dcd
+run
+quit

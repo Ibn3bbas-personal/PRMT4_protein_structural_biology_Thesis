@@ -1,0 +1,31 @@
+parm ../tleap/solvated_3b3f_dimer.parm7
+trajin ../mdrun/3b3f_dimer_md400.mdcrd 1 last 10
+unwrap :1-652    # Unwrap periodic boundary conditions (if required)
+center origin :1-652
+autoimage
+strip :WAT,Na+,Cl-
+
+atomiccorr :1-652&!(@H=) out corr_3b3f_Dimer.dat byres
+
+rms first @N,C,CA
+average @N,C,CA crdset trajaverage3b3fDimer
+createcrd trajectory3b3fDimer
+
+run
+
+#creating covariance matrix and projecting
+crdaction trajectory3b3fDimer rms ref trajaverage3b3fDimer @N,C,CA
+crdaction trajectory3b3fDimer matrix covar name covmatrix3b3fDimer @N,C,CA
+runanalysis diagmatrix covmatrix3b3fDimer out evecs3b3fDimer.dat vecs 10 name eigenvectors3b3fDimer nmwiz nmwizvecs 10 nmwizfile normalmodes3b3fDimer.nmd nmwizmask @N,C,CA
+crdaction trajectory3b3fDimer projection modes eigenvectors3b3fDimer beg 1 end 10 @N,C,CA out pca3b3fDimer.dat crdframes 1,last
+
+clear all
+readdata evecs3b3fDimer.dat name eigenvectors3b3fDimer
+parm stripped_3b3f_dimer.parm7
+parmwrite out 3b3fDimer.prmtop
+runanalysis modes name eigenvectors3b3fDimer trajout modes3b3fDimer.dcd pcmin -150 pcmax 150 tmode 1 trajoutmask @N,C,CA trajoutfmt dcd
+#the 3b3fDimer.prmtop can be read in a visualization software to ‘see’ the motions that correspond to each primary component
+
+run
+
+###################################################################################################################################
