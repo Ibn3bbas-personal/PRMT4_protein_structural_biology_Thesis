@@ -1,0 +1,23 @@
+#load protein force field
+source leaprc.protein.ff14SB
+#load TIP3P (water) force field
+source leaprc.water.tip3p
+#load ions frcmod for the tip3p model
+loadamberparams frcmod.ionsjc_tip3p
+#load protein pdb file
+protein = loadpdb ../structure/3b3f_dimer_protonated7_amber.pdb
+#solvate the system
+solvateoct protein TIP3PBOX 10.0
+#Neutralize system
+addions protein Na+ 0
+addions protein Cl- 0
+#neutralize the system to prepare 150 mM salt solutio
+addIonsRand protein Na+ 45 Cl- 45
+###check the system
+charge protein
+check protein
+#write topology and coordinate files 
+saveamberparm protein solvated_3b3f_dimer.parm7 solvated_3b3f_dimer.rst7
+savepdb protein solvated_3b3f_dimer.pdb
+#quit
+quit
