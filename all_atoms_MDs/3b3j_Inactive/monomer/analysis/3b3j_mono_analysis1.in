@@ -1,0 +1,20 @@
+parm ../tleap/solvated_3b3j_monomer.parm7
+trajin ../mdrun/3b3j_monomer_md400.mdcrd 1 last 10
+unwrap :1-326    # Unwrap periodic boundary conditions (if required)
+center origin :1-326
+autoimage
+strip :WAT,Na+,Cl-
+rmsd :1-326&!@H= first perres perresavg range 1-326 perres out rmsd_byres_3b3j_monomer_400.dat
+rms all @N,CA,C first out 3b3j_monomer_all_rmsd.dat
+rms pro :1-326&@N,CA,C first out 3b3j_monomer_pro_rmsd.dat
+atomicfluct :1-326&!(@H=) out rmsf_3b3j_monomer_400.dat byres
+radgyr :1-326&!(@H=) out rog_3b3j_monomer_400.dat mass
+trajout aligned_3b3j_monomer_md400_ski10.mdcrd nobox
+run
+clear all
+#######################################################################
+parm ../tleap/solvated_3b3j_monomer.parm7
+parmstrip :WAT,Na+,Cl-
+parmwrite out stripped_3b3j_monomer.parm7
+clear all
+#######################################################################

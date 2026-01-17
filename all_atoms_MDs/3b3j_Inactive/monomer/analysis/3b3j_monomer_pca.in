@@ -1,0 +1,29 @@
+parm ../tleap/solvated_3b3j_monomer.parm7
+trajin ../mdrun/3b3j_monomer_md400.mdcrd 1 last 10
+unwrap :1-326    # Unwrap periodic boundary conditions (if required)
+center origin :1-326
+autoimage
+strip :WAT,Na+,Cl-
+
+rms first @N,C,CA
+average @N,C,CA crdset trajaverage3b3jMonomer
+createcrd trajectory3b3jMonomer
+
+run
+
+#creating covariance matrix and projecting
+crdaction trajectory3b3jMonomer rms ref trajaverage3b3jMonomer @N,C,CA
+crdaction trajectory3b3jMonomer matrix covar name covmatrix3b3jMonomer @N,C,CA
+runanalysis diagmatrix covmatrix3b3jMonomer out evecs3b3jMonomer.dat vecs 10 name eigenvectors3b3jMonomer nmwiz nmwizvecs 10 nmwizfile normalmodes3b3jMonomer.nmd nmwizmask @N,C,CA
+crdaction trajectory3b3jMonomer projection modes eigenvectors3b3jMonomer beg 1 end 10 @N,C,CA out pca3b3jMonomer.dat crdframes 1,last
+
+clear all
+readdata evecs3b3jMonomer.dat name eigenvectors3b3jMonomer
+parm stripped_3b3j_monomer.parm7
+parmwrite out 3b3jMonomer.prmtop
+runanalysis modes name eigenvectors3b3jMonomer trajout modes3b3jMonomer.dcd pcmin -150 pcmax 150 tmode 1 trajoutmask @N,C,CA trajoutfmt dcd
+#the 3b3jMonomer.prmtop can be read in a visualization software to ‘see’ the motions that correspond to each primary component
+
+run
+
+###################################################################################################################################
