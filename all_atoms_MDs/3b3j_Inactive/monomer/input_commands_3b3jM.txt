@@ -1,0 +1,48 @@
+*****DON'T FORGET TO CHANGE THE FILE NAMES*****
+**Rule: -p is one in all / both -c and -ref are the same as -r of the previous step**
+
+nohup pmemd.cuda -O -i min.in -o 3b3j_mono_min1.out -p ../tleap/solvated_3b3j_monomer.parm7 -c ../tleap/solvated_3b3j_monomer.rst7 -r 3b3j_mono_min1.rst7 -inf 3b3j_mono_min1.info -ref ../tleap/solvated_3b3j_monomer.rst7 -x 3b3j_mono_min1.mdcrd -l 3b3j_mono_min1.log&
+nohup pmemd.cuda -O -i min.norests.in -o 3b3j_mono_min2.out -p ../tleap/solvated_3b3j_monomer.parm7 -c 3b3j_mono_min1.rst7 -r 3b3j_mono_min2.rst7 -inf 3b3j_mono_min2.info -ref 3b3j_mono_min1.rst7 -x 3b3j_mono_min2.mdcrd -l 3b3j_mono_min2.log&
+
+nohup pmemd.cuda -O -i 01_heat.rests1.in -o 3b3j_mono_heat.out -p ../tleap/solvated_3b3j_monomer.parm7 -c ../minimization/3b3j_mono_min2.rst7 -r 3b3j_mono_heat.rst7 -inf 3b3j_mono_heat.info -ref ../minimization/3b3j_mono_min2.rst7 -x 3b3j_mono_heat.mdcrd -l 3b3j_mono_heat.log&
+
+---
+parm ../tleap/solvated_3b3j_monomer.parm7
+trajin ../equilibration/3b3j_mono_heat.rst7
+center :1-332 mass origin
+image center origin familiar com :1-332
+strip :WAT,Na+,Cl-
+trajout 3b3j_mono_IniFrame.pdb pdb append
+---
+
+nohup pmemd.cuda -O -i 02_equil.lower_rests.in -o 3b3j_mono_equil1.out -p ../tleap/solvated_3b3j_monomer.parm7 -c 3b3j_mono_heat.rst7 -r 3b3j_mono_equil1.rst7 -inf 3b3j_mono_equil1.info -ref 3b3j_mono_heat.rst7 -x 3b3j_mono_equil1.mdcrd -l 3b3j_mono_equil1.log&
+nohup pmemd.cuda -O -i 03_equil.norests.in -o 3b3j_mono_equil2.out -p ../tleap/solvated_3b3j_monomer.parm7 -c 3b3j_mono_equil1.rst7 -r 3b3j_mono_equil2.rst7 -inf 3b3j_mono_equil2.info -ref 3b3j_mono_equil1.rst7 -x 3b3j_mono_equil2.mdcrd -l 3b3j_mono_equil2.log&
+
+nohup pmemd.cuda -O -i md.in -o 3b3j_monomer_md800.out -p ../tleap/solvated_3b3j_monomer.parm7 -c 3b3j_monomer_md400.rst7 -r 3b3j_monomer_md800.rst7 -inf 3b3j_monomer_md800.info -ref 3b3j_monomer_md400.rst7 -x 3b3j_monomer_md800.mdcrd -l 3b3j_monomer_md800.log &
+----
+parm ../tleap/solvated_3b3j_monomer.parm7
+trajin ../mdrun/3b3j_monomer_md250.rst7
+center :1-332 mass origin
+image center origin familiar com :1-332
+trajout LastFrame.pdb pdb append
+----
+#parm ../tleap/solvated_3b3j_monomer.parm7
+#trajin ../mdrun/3b3j_monomer_md250.mdcrd 1 1000 1
+#center :1-332 mass origin
+#image center origin familiar com :1-332
+#rms first mass out test.txt :1-332@CA
+---
+process_mdout.perl ../minimization/3b3j_mono_min1.out ../minimization/3b3j_mono_min2.out ../equilibration/3b3j_mono_heat.out ../equilibration/3b3j_mono_equil1.out ../equilibration/3b3j_mono_equil2.out 
+
+xmgrace summary.EPTOT summary.EKTOT summary.ETOT
+
+xmgrace summary.TEMP
+
+xmgrace summary.PRES
+
+---
+vi summary.VOLUME
+d<numberoflines>    (removes the current (first) line plus the next <numberoflines> lines)
+<esc>:wq summary.VOLUME.modified
+---
+xmgrace summary.VOLUME.modified
