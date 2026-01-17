@@ -1,0 +1,60 @@
+# 06/15/24 16:00:18
+parm ../tleap/solvated_3b3f_monomer.parm7
+trajin ../mdrun/3b3f_monomer_md400.mdcrd 1 last 10
+unwrap :1-326 
+center origin :1-326
+autoimage
+strip :WAT,Na+,Cl-
+rmsd :1-326&!@H= first perres out rmsd_byres_3b3f_monomer_400.dat perresavg 3b3fmonomerperresavg.dat
+rms all @N,CA,C first out 3b3f_monomer_all_rmsd.dat
+rms pro :1-326&@N,CA,C first out 3b3f_monomer_pro_rmsd.dat
+atomicfluct :1-326&!(@H=) out rmsf_3b3f_monomer_400.dat byres
+radgyr :1-326&!(@H=) out rog_3b3f_monomer_400.dat mass
+trajout aligned_3b3f_monomer_md400_ski10.mdcrd nobox
+run
+clear all
+parm ../tleap/solvated_3b3f_monomer.parm7
+parmstrip :WAT,Na+,Cl-
+parmwrite out stripped_3b3f_monomer.parm7
+run
+clear all
+parm ../tleap/solvated_3b3f_monomer.parm7
+trajin ../mdrun/3b3f_monomer_md400.mdcrd 1 last 10
+unwrap :1-326 
+center origin :1-326
+autoimage
+strip :WAT,Na+,Cl-
+atomiccorr :1-326&!(@H=) out corr_3b3f_Monomer.dat byres
+rms first @N,C,CA
+average @N,C,CA crdset trajaverage3b3fMonomer
+createcrd trajectory3b3fMonomer
+run
+crdaction trajectory3b3fMonomer rms ref trajaverage3b3fMonomer @N,C,CA
+crdaction trajectory3b3fMonomer matrix covar name covmatrix3b3fMonomer @N,C,CA
+runanalysis diagmatrix covmatrix3b3fMonomer out evecs3b3fMonomer.dat vecs 10 name eigenvectors3b3fMonomer nmwiz nmwizvecs 10 nmwizfile normalmodes3b3fMonomer.nmd nmwizmask @N,C,CA
+crdaction trajectory3b3fMonomer projection modes eigenvectors3b3fMonomer beg 1 end 10 @N,C,CA out pca3b3fMonomer.dat crdframes 1,last
+clear all
+readdata evecs3b3fMonomer.dat name eigenvectors3b3fMonomer
+parm stripped_3b3f_monomer.parm7
+parmwrite out 3b3fMonomer.prmtop
+runanalysis modes name eigenvectors3b3fMonomer trajout modes3b3fMonomer.dcd pcmin -150 pcmax 150 tmode 1 trajoutmask @N,C,CA trajoutfmt dcd
+run
+# 06/23/24 05:22:42
+parm ../tleap/solvated_3b3f_monomer.parm7
+trajin aligned_3b3f_monomer_md400_ski10.mdcrd 1 1 1
+trajin aligned_3b3f_monomer_md400_ski10.mdcrd first
+trajin aligned_3b3f_monomer_md400_ski10.mdcrd first
+trajin ../equilibration/3b3f_mono_heat.rst7
+trajin ../equilibration/3b3f_mono_equil2.rst7
+trajin ../equilibration/3b3f_mono_equil2.rst7
+center :1-326 mass origin
+image center origin familiar com :1-326
+strip :WAT,Na+,Cl-
+trajout 3b3f_mono_IniFrame.pdb pdb append
+run
+quit
+# 06/23/24 06:12:42
+parm stripped_3b3f_monomer.parm7
+trajin aligned_3b3f_monomer_md400_ski10.mdcrd
+trajout aligned_3b3f_monomer_md400_ski10.dcd
+run
