@@ -1,0 +1,12 @@
+heat up with restraints, 100ps
+ &cntrl
+  imin = 0, irest = 0, ntx = 1,ig=-1,
+  ntp=1,ntb = 2, cut = 9.0, ntc = 2, ntf = 2, ntr = 1,
+  tempi = 0, temp0 =  300.0, ntt = 2,
+  nstlim = 50000, dt = 0.002,
+  ntpr = 500, ntwx = 500, ntwr = 5000,
+  iwrap = 1, ioutfm = 1, saltcon = 0.1
+  restraintmask='!:WAT& :1-326@CA,C,O,N',restraint_wt=10.0
+ /
+END
+

@@ -1,0 +1,1579 @@
+
+          -------------------------------------------------------
+          Amber 22 PMEMD                              2022
+          -------------------------------------------------------
+
+| PMEMD implementation of SANDER, Release 22
+
+|  Compiled date/time: Fri Apr 15 02:06:37 2022
+| Run on 06/07/2024 at 18:01:48
+
+|   Executable path: pmemd.cuda
+| Working directory: /home/yef/Abbas/3b3f/monomer/equilibration
+|          Hostname: Unknown
+  [-O]verwriting output
+
+File Assignments:
+|   MDIN: 03_equil.norests.in                                                   
+|  MDOUT: 3b3f_mono_equil2.out                                                  
+| INPCRD: 3b3f_mono_equil1.rst7                                                 
+|   PARM: ../tleap/solvated_3b3f_monomer.parm7                                  
+| RESTRT: 3b3f_mono_equil2.rst7                                                 
+|   REFC: 3b3f_mono_equil1.rst7                                                 
+|  MDVEL: mdvel                                                                 
+|   MDEN: mden                                                                  
+|  MDCRD: 3b3f_mono_equil2.mdcrd                                                
+| MDINFO: 3b3f_mono_equil2.info                                                 
+|  MDFRC: mdfrc                                                                 
+
+
+ Here is the input file:
+
+equil with no restrait on protein, 1000ps                                      
+ &cntrl                                                                        
+  imin = 0, irest = 1, ntx = 5,ig=-1,                                          
+  ntb = 2, pres0 = 1.0, ntp = 1,                                               
+  cut = 9.0, ntc = 2, ntf = 2,                                                 
+  tempi = 300.0, temp0 = 300.0, ntt = 2,                                       
+  nstlim = 50000, dt = 0.002, nscm = 500,                                      
+  ntpr = 500, ntwx = 500, ntwr = 5000, ntwe = 5000,                            
+  iwrap = 1, ioutfm = 1, saltcon = 0.1                                         
+ /                                                                             
+
+
+Note: ig = -1. Setting random seed to   709369 based on wallclock time in 
+      microseconds.
+| irandom = 1, using AMBER's internal random number generator (default).
+ 
+|--------------------- INFORMATION ----------------------
+| GPU (CUDA) Version of PMEMD in use: NVIDIA GPU IN USE.
+|                    Version 18.0.0
+| 
+|                      03/25/2018
+| 
+| Implementation by:
+|                    Ross C. Walker     (SDSC)
+|                    Scott Le Grand     (nVIDIA)
+| 
+| Version 18 performance extensions by:
+|                    David Cerutti     (Rutgers)
+| 
+| Precision model in use:
+|      [SPFP] - Single Precision Forces, 64-bit Fixed Point
+|               Accumulation. (Default)
+| 
+|--------------------------------------------------------
+ 
+|----------------- CITATION INFORMATION -----------------
+|
+|    When publishing work that utilized the CUDA version
+|    of AMBER, please cite the following in addition to
+|    the regular AMBER citations:
+|
+|  - Romelia Salomon-Ferrer; Andreas W. Goetz; Duncan
+|    Poole; Scott Le Grand; Ross C. Walker "Routine
+|    microsecond molecular dynamics simulations with
+|    AMBER - Part II: Particle Mesh Ewald", J. Chem.
+|    Theory Comput., 2013, 9 (9), pp3878-3888,
+|    DOI: 10.1021/ct400314y.
+|
+|  - Andreas W. Goetz; Mark J. Williamson; Dong Xu;
+|    Duncan Poole; Scott Le Grand; Ross C. Walker
+|    "Routine microsecond molecular dynamics simulations
+|    with AMBER - Part I: Generalized Born", J. Chem.
+|    Theory Comput., 2012, 8 (5), pp1542-1555.
+|
+|  - Scott Le Grand; Andreas W. Goetz; Ross C. Walker
+|    "SPFP: Speed without compromise - a mixed precision
+|    model for GPU accelerated molecular dynamics
+|    simulations.", Comp. Phys. Comm., 2013, 184
+|    pp374-380, DOI: 10.1016/j.cpc.2012.09.022
+|
+|--------------------------------------------------------
+ 
+|------------------- GPU DEVICE INFO --------------------
+|
+|            CUDA_VISIBLE_DEVICES: not set
+|   CUDA Capable Devices Detected:      1
+|           CUDA Device ID in use:      0
+|                CUDA Device Name: NVIDIA GeForce RTX 4090
+|     CUDA Device Global Mem Size:  24217 MB
+| CUDA Device Num Multiprocessors:    128
+|           CUDA Device Core Freq:   2.58 GHz
+|
+|--------------------------------------------------------
+ 
+ 
+| Conditional Compilation Defines Used:
+| PUBFFT
+| BINTRAJ
+| CUDA
+| EMIL
+
+| Largest sphere to fit in unit cell has radius =    34.485
+
+| New format PARM file being parsed.
+| Version =    1.000 Date = 06/07/24 Time = 17:06:23
+
+| Note: 1-4 EEL scale factors are being read from the topology file.
+
+| Note: 1-4 VDW scale factors are being read from the topology file.
+| Duplicated    0 dihedrals
+
+| Duplicated    0 dihedrals
+
+--------------------------------------------------------------------------------
+   1.  RESOURCE   USE: 
+--------------------------------------------------------------------------------
+
+ getting box info from netcdf restart file
+ NATOM  =   46420 NTYPES =      17 NBONH =   43739 MBONA  =    2679
+ NTHETH =    5850 MTHETA =    3632 NPHIH =   11864 MPHIA  =   11569
+ NHPARM =       0 NPARM  =       0 NNB   =   83605 NRES   =   14115
+ NBONA  =    2679 NTHETA =    3632 NPHIA =   11569 NUMBND =      71
+ NUMANG =     163 NPTRA  =     212 NATYP =      38 NPHB   =       0
+ IFBOX  =       2 NMXRS  =      24 IFCAP =       0 NEXTRA =       0
+ NCOPY  =       0
+
+| Coordinate Index Table dimensions:    15   15   15
+| Direct force subcell size =     5.6315    5.6315    5.6315
+
+     BOX TYPE: TRUNCATED OCTAHEDRON
+
+--------------------------------------------------------------------------------
+   2.  CONTROL  DATA  FOR  THE  RUN
+--------------------------------------------------------------------------------
+
+default_name                                                                    
+
+General flags:
+     imin    =       0, nmropt  =       0
+
+Nature and format of input:
+     ntx     =       5, irest   =       1, ntrx    =       1
+
+Nature and format of output:
+     ntxo    =       2, ntpr    =     500, ntrx    =       1, ntwr    =    5000
+     iwrap   =       1, ntwx    =     500, ntwv    =       0, ntwe    =    5000
+     ioutfm  =       1, ntwprt  =       0, idecomp =       0, rbornstat=      0
+
+Potential function:
+     ntf     =       2, ntb     =       2, igb     =       0, nsnb    =      25
+     ipol    =       0, gbsa    =       0, iesp    =       0
+     dielc   =   1.00000, cut     =   9.00000, intdiel =   1.00000
+
+Frozen or restrained atoms:
+     ibelly  =       0, ntr     =       0
+
+Molecular dynamics:
+     nstlim  =     50000, nscm    =       500, nrespa  =         1
+     t       =   0.00000, dt      =   0.00200, vlimit  =  -1.00000
+
+Anderson (strong collision) temperature regulation:
+     ig      =  709369, vrand   =    1000
+     temp0   = 300.00000, tempi   = 300.00000
+
+Pressure regulation:
+     ntp     =       1
+     pres0   =   1.00000, comp    =  44.60000, taup    =   1.00000
+
+SHAKE:
+     ntc     =       2, jfastw  =       0
+     tol     =   0.00001
+
+| Intermolecular bonds treatment:
+|     no_intermolecular_bonds =       1
+
+| Energy averages sample interval:
+|     ene_avg_sampling =     500
+
+Ewald parameters:
+     verbose =       0, ew_type =       0, nbflag  =       1, use_pme =       1
+     vdwmeth =       1, eedmeth =       1, netfrc  =       1
+     Box X =   84.472   Box Y =   84.472   Box Z =   84.472
+     Alpha =  109.471   Beta  =  109.471   Gamma =  109.471
+     NFFT1 =   96       NFFT2 =   96       NFFT3 =   96
+     Cutoff=    9.000   Tol   =0.100E-04
+     Ewald Coefficient =  0.30768
+     Interpolation order =    4
+
+--------------------------------------------------------------------------------
+   3.  ATOMIC COORDINATES AND VELOCITIES
+--------------------------------------------------------------------------------
+
+default_name                                                                    
+ begin time read from input coords =   200.000 ps
+
+ 
+ Number of triangulated 3-point waters found:    13720
+
+     Sum of charges from parm topology file =  -0.00000022
+     Forcing neutrality...
+
+| Dynamic Memory, Types Used:
+| Reals             1923272
+| Integers          1951582
+
+| Nonbonded Pairs Initial Allocation:    10583760
+
+| GPU memory information (estimate):
+| KB of GPU memory in use:    399007
+| KB of CPU memory in use:    114559
+
+--------------------------------------------------------------------------------
+   4.  RESULTS
+--------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.002066     0.01(Removed)
+wrapping first mol.:      -56.34467       39.84170       69.00785
+
+ NSTEP =      500   TIME(PS) =     201.000  TEMP(K) =   296.87  PRESS =   -10.7
+ Etot   =   -116577.6736  EKtot   =     28174.4902  EPtot      =   -144752.1638
+ BOND   =       974.8513  ANGLE   =      2703.1008  DIHED      =      4200.8278
+ 1-4 NB =      1202.4296  1-4 EEL =     14012.3405  VDWAALS    =     16821.3379
+ EELEC  =   -184667.0518  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12313.9926  VIRIAL  =     12421.0082  VOLUME     =    464740.8801
+                                                    Density    =         1.0226
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step     1000
+check COM velocity, temp:        0.002795     0.01(Removed)
+wrapping first mol.:      -56.32521       39.82795       68.98402
+
+ NSTEP =     1000   TIME(PS) =     202.000  TEMP(K) =   299.03  PRESS =  -197.5
+ Etot   =   -116595.2184  EKtot   =     28379.9282  EPtot      =   -144975.1466
+ BOND   =       979.7149  ANGLE   =      2659.1052  DIHED      =      4168.2379
+ 1-4 NB =      1200.9622  1-4 EEL =     14046.1152  VDWAALS    =     16464.0705
+ EELEC  =   -184493.3526  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12246.2053  VIRIAL  =     14225.6582  VOLUME     =    464267.3403
+                                                    Density    =         1.0236
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.30670       39.81486       68.96135
+
+ NSTEP =     1500   TIME(PS) =     203.000  TEMP(K) =   299.39  PRESS =    41.3
+ Etot   =   -116751.5340  EKtot   =     28413.8008  EPtot      =   -145165.3348
+ BOND   =      1027.6564  ANGLE   =      2669.9501  DIHED      =      4186.8221
+ 1-4 NB =      1202.6056  1-4 EEL =     14029.3013  VDWAALS    =     16712.3227
+ EELEC  =   -184993.9929  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12582.2332  VIRIAL  =     12168.1716  VOLUME     =    463799.8468
+                                                    Density    =         1.0247
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step     2000
+check COM velocity, temp:        0.002816     0.01(Removed)
+wrapping first mol.:      -56.30810       39.81585       68.96307
+
+ NSTEP =     2000   TIME(PS) =     204.000  TEMP(K) =   298.81  PRESS =   124.5
+ Etot   =   -116756.3359  EKtot   =     28358.5132  EPtot      =   -145114.8491
+ BOND   =      1014.3050  ANGLE   =      2649.9691  DIHED      =      4186.0764
+ 1-4 NB =      1200.4829  1-4 EEL =     13984.8864  VDWAALS    =     16745.9845
+ EELEC  =   -184896.5534  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12371.1143  VIRIAL  =     11124.0689  VOLUME     =    463831.1969
+                                                    Density    =         1.0246
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.27673       39.79367       68.92465
+
+ NSTEP =     2500   TIME(PS) =     205.000  TEMP(K) =   298.88  PRESS =   112.1
+ Etot   =   -116783.8341  EKtot   =     28365.2969  EPtot      =   -145149.1309
+ BOND   =       989.8538  ANGLE   =      2678.5829  DIHED      =      4192.2809
+ 1-4 NB =      1190.1972  1-4 EEL =     13963.2226  VDWAALS    =     16786.9423
+ EELEC  =   -184950.2107  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12393.6743  VIRIAL  =     11272.8636  VOLUME     =    463056.8604
+                                                    Density    =         1.0263
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step     3000
+check COM velocity, temp:        0.001773     0.00(Removed)
+wrapping first mol.:      -56.27956       39.79567       68.92811
+
+ NSTEP =     3000   TIME(PS) =     206.000  TEMP(K) =   300.90  PRESS =    10.4
+ Etot   =   -116790.5360  EKtot   =     28557.3367  EPtot      =   -145347.8726
+ BOND   =      1012.8296  ANGLE   =      2640.0498  DIHED      =      4167.7940
+ 1-4 NB =      1233.3791  1-4 EEL =     13986.2590  VDWAALS    =     16675.0479
+ EELEC  =   -185063.2320  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12383.7633  VIRIAL  =     12280.0691  VOLUME     =    463130.9140
+                                                    Density    =         1.0262
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.28772       39.80144       68.93810
+
+ NSTEP =     3500   TIME(PS) =     207.000  TEMP(K) =   299.15  PRESS =  -237.8
+ Etot   =   -116848.8015  EKtot   =     28391.5645  EPtot      =   -145240.3660
+ BOND   =       939.6275  ANGLE   =      2646.4789  DIHED      =      4154.5157
+ 1-4 NB =      1222.0056  1-4 EEL =     13949.0225  VDWAALS    =     16384.9014
+ EELEC  =   -184536.9175  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12352.8230  VIRIAL  =     14731.3939  VOLUME     =    463342.5661
+                                                    Density    =         1.0257
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step     4000
+check COM velocity, temp:        0.003801     0.02(Removed)
+wrapping first mol.:      -56.28709       39.80099       68.93733
+
+ NSTEP =     4000   TIME(PS) =     208.000  TEMP(K) =   298.66  PRESS =    68.6
+ Etot   =   -116852.3755  EKtot   =     28344.9284  EPtot      =   -145197.3039
+ BOND   =       978.2417  ANGLE   =      2661.5102  DIHED      =      4190.0182
+ 1-4 NB =      1223.0798  1-4 EEL =     14063.5053  VDWAALS    =     16867.3174
+ EELEC  =   -185180.9765  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12324.1033  VIRIAL  =     11638.0969  VOLUME     =    463314.4100
+                                                    Density    =         1.0258
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.32828       39.83011       68.98778
+
+ NSTEP =     4500   TIME(PS) =     209.000  TEMP(K) =   299.08  PRESS =   128.6
+ Etot   =   -116726.1115  EKtot   =     28384.5664  EPtot      =   -145110.6779
+ BOND   =       950.8056  ANGLE   =      2606.5774  DIHED      =      4177.9148
+ 1-4 NB =      1217.1594  1-4 EEL =     14067.7695  VDWAALS    =     16966.8873
+ EELEC  =   -185097.7920  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12295.6063  VIRIAL  =     11005.9717  VOLUME     =    464329.6778
+                                                    Density    =         1.0235
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step     5000
+check COM velocity, temp:        0.001781     0.00(Removed)
+wrapping first mol.:      -56.31882       39.82343       68.97619
+wrapping first mol.:      -56.31882       39.82343       68.97619
+
+ NSTEP =     5000   TIME(PS) =     210.000  TEMP(K) =   300.34  PRESS =   182.7
+ Etot   =   -116729.6618  EKtot   =     28504.0266  EPtot      =   -145233.6884
+ BOND   =      1007.1492  ANGLE   =      2614.3450  DIHED      =      4191.3990
+ 1-4 NB =      1217.3792  1-4 EEL =     13944.0403  VDWAALS    =     17056.4243
+ EELEC  =   -185264.4254  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12494.2365  VIRIAL  =     10663.6511  VOLUME     =    464093.5847
+                                                    Density    =         1.0240
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.30336       39.81249       68.95726
+
+ NSTEP =     5500   TIME(PS) =     211.000  TEMP(K) =   297.30  PRESS =   -22.0
+ Etot   =   -116846.5751  EKtot   =     28215.8145  EPtot      =   -145062.3896
+ BOND   =       970.6809  ANGLE   =      2632.6873  DIHED      =      4198.2437
+ 1-4 NB =      1254.1905  1-4 EEL =     14069.3378  VDWAALS    =     16786.2464
+ EELEC  =   -184973.7764  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12274.3416  VIRIAL  =     12494.4227  VOLUME     =    463719.9748
+                                                    Density    =         1.0249
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step     6000
+check COM velocity, temp:        0.002289     0.01(Removed)
+wrapping first mol.:      -56.31988       39.82417       68.97749
+
+ NSTEP =     6000   TIME(PS) =     212.000  TEMP(K) =   296.93  PRESS =    14.0
+ Etot   =   -116846.6703  EKtot   =     28180.3118  EPtot      =   -145026.9821
+ BOND   =       983.4265  ANGLE   =      2630.7307  DIHED      =      4224.9272
+ 1-4 NB =      1204.2911  1-4 EEL =     13971.0080  VDWAALS    =     16663.8502
+ EELEC  =   -184705.2158  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12217.6098  VIRIAL  =     12077.7447  VOLUME     =    464126.7197
+                                                    Density    =         1.0240
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.34445       39.84155       69.00758
+
+ NSTEP =     6500   TIME(PS) =     213.000  TEMP(K) =   300.23  PRESS =  -122.3
+ Etot   =   -116448.9441  EKtot   =     28493.2832  EPtot      =   -144942.2273
+ BOND   =       985.6543  ANGLE   =      2671.1335  DIHED      =      4145.1001
+ 1-4 NB =      1219.1942  1-4 EEL =     14012.8533  VDWAALS    =     16554.8176
+ EELEC  =   -184530.9805  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12360.5858  VIRIAL  =     13587.4391  VOLUME     =    464740.1332
+                                                    Density    =         1.0226
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step     7000
+check COM velocity, temp:        0.001424     0.00(Removed)
+wrapping first mol.:      -56.32317       39.82650       68.98152
+
+ NSTEP =     7000   TIME(PS) =     214.000  TEMP(K) =   301.53  PRESS =   -51.8
+ Etot   =   -116465.0222  EKtot   =     28617.4852  EPtot      =   -145082.5074
+ BOND   =      1027.5414  ANGLE   =      2618.0984  DIHED      =      4181.6073
+ 1-4 NB =      1205.1255  1-4 EEL =     13962.8572  VDWAALS    =     16535.1345
+ EELEC  =   -184612.8716  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12487.4106  VIRIAL  =     13006.9615  VOLUME     =    464210.8585
+                                                    Density    =         1.0238
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.28001       39.79599       68.92867
+
+ NSTEP =     7500   TIME(PS) =     215.000  TEMP(K) =   299.20  PRESS =   -24.7
+ Etot   =   -116811.6310  EKtot   =     28396.1992  EPtot      =   -145207.8302
+ BOND   =      1008.9290  ANGLE   =      2608.7276  DIHED      =      4194.6126
+ 1-4 NB =      1221.7510  1-4 EEL =     13988.1463  VDWAALS    =     16655.9631
+ EELEC  =   -184885.9598  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12294.8338  VIRIAL  =     12541.6720  VOLUME     =    463143.5398
+                                                    Density    =         1.0261
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step     8000
+check COM velocity, temp:        0.004217     0.03(Removed)
+wrapping first mol.:      -56.33741       39.83657       68.99896
+
+ NSTEP =     8000   TIME(PS) =     216.000  TEMP(K) =   301.97  PRESS =   -97.3
+ Etot   =   -116796.5168  EKtot   =     28658.6459  EPtot      =   -145455.1627
+ BOND   =      1056.6239  ANGLE   =      2565.3345  DIHED      =      4176.9935
+ 1-4 NB =      1200.6171  1-4 EEL =     14005.8104  VDWAALS    =     16964.0407
+ EELEC  =   -185424.5828  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12469.1499  VIRIAL  =     13445.3564  VOLUME     =    464564.8652
+                                                    Density    =         1.0230
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.33124       39.83221       68.99141
+
+ NSTEP =     8500   TIME(PS) =     217.000  TEMP(K) =   299.86  PRESS =   -88.6
+ Etot   =   -116981.4513  EKtot   =     28458.4102  EPtot      =   -145439.8615
+ BOND   =       978.6694  ANGLE   =      2647.3606  DIHED      =      4196.9836
+ 1-4 NB =      1205.6823  1-4 EEL =     14017.5513  VDWAALS    =     16583.1522
+ EELEC  =   -185069.2609  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12491.5988  VIRIAL  =     13380.4874  VOLUME     =    464412.1105
+                                                    Density    =         1.0233
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step     9000
+check COM velocity, temp:        0.004758     0.03(Removed)
+wrapping first mol.:      -56.31920       39.82370       68.97667
+
+ NSTEP =     9000   TIME(PS) =     218.000  TEMP(K) =   298.11  PRESS =    39.0
+ Etot   =   -116987.6167  EKtot   =     28292.9587  EPtot      =   -145280.5754
+ BOND   =       997.9394  ANGLE   =      2590.9643  DIHED      =      4187.3875
+ 1-4 NB =      1210.2726  1-4 EEL =     13983.9827  VDWAALS    =     17132.3175
+ EELEC  =   -185383.4394  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12329.5557  VIRIAL  =     11938.3254  VOLUME     =    464109.0991
+                                                    Density    =         1.0240
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.33213       39.83284       68.99250
+
+ NSTEP =     9500   TIME(PS) =     219.000  TEMP(K) =   300.65  PRESS =    98.4
+ Etot   =   -116807.2732  EKtot   =     28533.2520  EPtot      =   -145340.5251
+ BOND   =      1018.4336  ANGLE   =      2651.3275  DIHED      =      4164.0258
+ 1-4 NB =      1203.6025  1-4 EEL =     13946.3288  VDWAALS    =     16923.2681
+ EELEC  =   -185247.5115  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12578.7172  VIRIAL  =     11591.7403  VOLUME     =    464426.3413
+                                                    Density    =         1.0233
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    10000
+check COM velocity, temp:        0.001127     0.00(Removed)
+wrapping first mol.:      -56.33292       39.83340       68.99347
+wrapping first mol.:      -56.33292       39.83340       68.99347
+
+ NSTEP =    10000   TIME(PS) =     220.000  TEMP(K) =   297.89  PRESS =   117.1
+ Etot   =   -116807.8050  EKtot   =     28271.8334  EPtot      =   -145079.6384
+ BOND   =      1010.3631  ANGLE   =      2632.0528  DIHED      =      4173.2925
+ 1-4 NB =      1215.4637  1-4 EEL =     13963.8639  VDWAALS    =     16949.1298
+ EELEC  =   -185023.8042  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12338.8522  VIRIAL  =     11164.5296  VOLUME     =    464445.1376
+                                                    Density    =         1.0233
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.32031       39.82448       68.97802
+
+ NSTEP =    10500   TIME(PS) =     221.000  TEMP(K) =   299.77  PRESS =  -326.5
+ Etot   =   -116699.3511  EKtot   =     28450.2617  EPtot      =   -145149.6128
+ BOND   =      1025.9940  ANGLE   =      2658.8093  DIHED      =      4169.0943
+ 1-4 NB =      1234.0027  1-4 EEL =     13976.2591  VDWAALS    =     16600.0895
+ EELEC  =   -184813.8618  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12447.3425  VIRIAL  =     15719.6628  VOLUME     =    464151.5855
+                                                    Density    =         1.0239
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    11000
+check COM velocity, temp:        0.002057     0.01(Removed)
+wrapping first mol.:      -56.33826       39.83718       69.00001
+
+ NSTEP =    11000   TIME(PS) =     222.000  TEMP(K) =   298.98  PRESS =  -105.3
+ Etot   =   -116698.4305  EKtot   =     28375.5061  EPtot      =   -145073.9366
+ BOND   =      1004.3688  ANGLE   =      2661.9352  DIHED      =      4197.6743
+ 1-4 NB =      1218.1769  1-4 EEL =     13973.1710  VDWAALS    =     16820.7815
+ EELEC  =   -184950.0444  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12400.7957  VIRIAL  =     13457.1338  VOLUME     =    464586.4191
+                                                    Density    =         1.0229
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.32187       39.82559       68.97993
+
+ NSTEP =    11500   TIME(PS) =     223.000  TEMP(K) =   298.77  PRESS =   -31.8
+ Etot   =   -116718.0000  EKtot   =     28354.8926  EPtot      =   -145072.8926
+ BOND   =      1018.0051  ANGLE   =      2747.8793  DIHED      =      4186.6502
+ 1-4 NB =      1221.7603  1-4 EEL =     13980.0597  VDWAALS    =     16567.7870
+ EELEC  =   -184795.0342  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12245.6031  VIRIAL  =     12564.4192  VOLUME     =    464177.9516
+                                                    Density    =         1.0238
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    12000
+check COM velocity, temp:        0.001512     0.00(Removed)
+wrapping first mol.:      -56.31259       39.81902       68.96857
+
+ NSTEP =    12000   TIME(PS) =     224.000  TEMP(K) =   300.12  PRESS =   -61.8
+ Etot   =   -116724.7707  EKtot   =     28482.9214  EPtot      =   -145207.6921
+ BOND   =       996.9116  ANGLE   =      2688.4570  DIHED      =      4200.5415
+ 1-4 NB =      1220.3894  1-4 EEL =     13931.7941  VDWAALS    =     16646.0039
+ EELEC  =   -184891.7896  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12388.0114  VIRIAL  =     13007.1160  VOLUME     =    463949.8139
+                                                    Density    =         1.0243
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.31700       39.82214       68.97396
+
+ NSTEP =    12500   TIME(PS) =     225.000  TEMP(K) =   298.96  PRESS =    11.6
+ Etot   =   -116533.2677  EKtot   =     28372.9238  EPtot      =   -144906.1915
+ BOND   =       981.2657  ANGLE   =      2581.9406  DIHED      =      4174.3991
+ 1-4 NB =      1264.4771  1-4 EEL =     14067.9195  VDWAALS    =     16551.5880
+ EELEC  =   -184527.7814  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12418.1142  VIRIAL  =     12301.6313  VOLUME     =    464055.7121
+                                                    Density    =         1.0241
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    13000
+check COM velocity, temp:        0.003904     0.02(Removed)
+wrapping first mol.:      -56.32934       39.83087       68.98908
+
+ NSTEP =    13000   TIME(PS) =     226.000  TEMP(K) =   300.18  PRESS =   -83.3
+ Etot   =   -116531.7706  EKtot   =     28488.7282  EPtot      =   -145020.4988
+ BOND   =       948.7093  ANGLE   =      2683.8209  DIHED      =      4176.1343
+ 1-4 NB =      1254.3717  1-4 EEL =     14011.2546  VDWAALS    =     16746.1511
+ EELEC  =   -184840.9408  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12357.2257  VIRIAL  =     13192.2827  VOLUME     =    464364.8849
+                                                    Density    =         1.0234
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.31952       39.82392       68.97705
+
+ NSTEP =    13500   TIME(PS) =     227.000  TEMP(K) =   299.28  PRESS =   -57.9
+ Etot   =   -116488.8551  EKtot   =     28403.6621  EPtot      =   -144892.5172
+ BOND   =       979.1461  ANGLE   =      2681.2229  DIHED      =      4201.5282
+ 1-4 NB =      1214.7411  1-4 EEL =     13981.2167  VDWAALS    =     16635.9359
+ EELEC  =   -184586.3083  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12373.8062  VIRIAL  =     12954.4975  VOLUME     =    464120.9432
+                                                    Density    =         1.0240
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    14000
+check COM velocity, temp:        0.003825     0.02(Removed)
+wrapping first mol.:      -56.31131       39.81811       68.96699
+
+ NSTEP =    14000   TIME(PS) =     228.000  TEMP(K) =   300.55  PRESS =   -28.1
+ Etot   =   -116495.1043  EKtot   =     28523.8658  EPtot      =   -145018.9701
+ BOND   =       946.6657  ANGLE   =      2671.0410  DIHED      =      4173.8614
+ 1-4 NB =      1223.9035  1-4 EEL =     14024.6018  VDWAALS    =     16849.0552
+ EELEC  =   -184908.0987  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12402.2943  VIRIAL  =     12683.7747  VOLUME     =    463916.6130
+                                                    Density    =         1.0244
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.31391       39.81995       68.97018
+
+ NSTEP =    14500   TIME(PS) =     229.000  TEMP(K) =   298.49  PRESS =   -46.3
+ Etot   =   -116620.0947  EKtot   =     28328.8555  EPtot      =   -144948.9502
+ BOND   =       996.5440  ANGLE   =      2651.3225  DIHED      =      4198.1131
+ 1-4 NB =      1210.4104  1-4 EEL =     14006.9753  VDWAALS    =     16810.4323
+ EELEC  =   -184822.7479  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12376.0613  VIRIAL  =     12840.1889  VOLUME     =    463981.6562
+                                                    Density    =         1.0243
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    15000
+check COM velocity, temp:        0.001012     0.00(Removed)
+wrapping first mol.:      -56.32388       39.82701       68.98239
+wrapping first mol.:      -56.32388       39.82701       68.98239
+
+ NSTEP =    15000   TIME(PS) =     230.000  TEMP(K) =   298.76  PRESS =    30.1
+ Etot   =   -116622.2262  EKtot   =     28353.8063  EPtot      =   -144976.0325
+ BOND   =       981.2458  ANGLE   =      2686.0087  DIHED      =      4218.7884
+ 1-4 NB =      1226.0213  1-4 EEL =     14016.2672  VDWAALS    =     16783.6299
+ EELEC  =   -184887.9938  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12429.5635  VIRIAL  =     12128.0342  VOLUME     =    464225.1079
+                                                    Density    =         1.0237
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.34397       39.84121       69.00700
+
+ NSTEP =    15500   TIME(PS) =     231.000  TEMP(K) =   299.19  PRESS =    64.5
+ Etot   =   -116580.5146  EKtot   =     28394.8438  EPtot      =   -144975.3583
+ BOND   =      1040.7435  ANGLE   =      2695.3119  DIHED      =      4194.5528
+ 1-4 NB =      1213.2457  1-4 EEL =     14021.6456  VDWAALS    =     16853.2527
+ EELEC  =   -184994.1104  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12417.6398  VIRIAL  =     11770.4399  VOLUME     =    464720.6209
+                                                    Density    =         1.0226
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    16000
+check COM velocity, temp:        0.002581     0.01(Removed)
+wrapping first mol.:      -56.31566       39.82120       68.97233
+
+ NSTEP =    16000   TIME(PS) =     232.000  TEMP(K) =   299.39  PRESS =  -141.8
+ Etot   =   -116598.6249  EKtot   =     28414.3049  EPtot      =   -145012.9299
+ BOND   =      1008.8360  ANGLE   =      2632.4066  DIHED      =      4206.0802
+ 1-4 NB =      1245.9959  1-4 EEL =     14028.1399  VDWAALS    =     16688.5974
+ EELEC  =   -184822.9858  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12425.5514  VIRIAL  =     13845.7619  VOLUME     =    464029.0535
+                                                    Density    =         1.0242
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.30642       39.81466       68.96101
+
+ NSTEP =    16500   TIME(PS) =     233.000  TEMP(K) =   299.54  PRESS =    33.6
+ Etot   =   -116619.5749  EKtot   =     28428.5410  EPtot      =   -145048.1159
+ BOND   =      1032.9564  ANGLE   =      2673.0852  DIHED      =      4189.6777
+ 1-4 NB =      1208.4680  1-4 EEL =     13991.8963  VDWAALS    =     16746.5610
+ EELEC  =   -184890.7605  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12473.9281  VIRIAL  =     12137.8689  VOLUME     =    463793.2907
+                                                    Density    =         1.0247
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    17000
+check COM velocity, temp:        0.002128     0.01(Removed)
+wrapping first mol.:      -56.26936       39.78845       68.91561
+
+ NSTEP =    17000   TIME(PS) =     234.000  TEMP(K) =   300.52  PRESS =   -12.4
+ Etot   =   -116639.4176  EKtot   =     28521.0756  EPtot      =   -145160.4932
+ BOND   =       959.5389  ANGLE   =      2712.9888  DIHED      =      4159.4704
+ 1-4 NB =      1240.6205  1-4 EEL =     13981.1528  VDWAALS    =     16574.3562
+ EELEC  =   -184788.6207  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12487.7111  VIRIAL  =     12611.7690  VOLUME     =    462879.9455
+                                                    Density    =         1.0267
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.31347       39.81965       68.96964
+
+ NSTEP =    17500   TIME(PS) =     235.000  TEMP(K) =   301.47  PRESS =   108.2
+ Etot   =   -116590.1907  EKtot   =     28611.1973  EPtot      =   -145201.3879
+ BOND   =       951.4071  ANGLE   =      2678.9497  DIHED      =      4199.9339
+ 1-4 NB =      1196.1696  1-4 EEL =     13961.3862  VDWAALS    =     16869.3256
+ EELEC  =   -185058.5600  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12435.7592  VIRIAL  =     11351.7714  VOLUME     =    463964.4984
+                                                    Density    =         1.0243
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    18000
+check COM velocity, temp:        0.002579     0.01(Removed)
+wrapping first mol.:      -56.31043       39.81750       68.96592
+
+ NSTEP =    18000   TIME(PS) =     236.000  TEMP(K) =   298.94  PRESS =   115.4
+ Etot   =   -116592.6983  EKtot   =     28370.9602  EPtot      =   -144963.6584
+ BOND   =      1039.0645  ANGLE   =      2634.0201  DIHED      =      4161.2874
+ 1-4 NB =      1228.1354  1-4 EEL =     14008.6413  VDWAALS    =     16561.4745
+ EELEC  =   -184596.2817  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12388.5630  VIRIAL  =     11232.7546  VOLUME     =    463889.0716
+                                                    Density    =         1.0245
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.30794       39.81574       68.96287
+
+ NSTEP =    18500   TIME(PS) =     237.000  TEMP(K) =   299.53  PRESS =   -46.5
+ Etot   =   -116444.3881  EKtot   =     28427.6641  EPtot      =   -144872.0521
+ BOND   =      1065.2151  ANGLE   =      2660.5866  DIHED      =      4182.7715
+ 1-4 NB =      1216.6222  1-4 EEL =     14022.9832  VDWAALS    =     16858.8253
+ EELEC  =   -184879.0559  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12243.2995  VIRIAL  =     12708.7739  VOLUME     =    463834.2695
+                                                    Density    =         1.0246
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    19000
+check COM velocity, temp:        0.001993     0.01(Removed)
+wrapping first mol.:      -56.30466       39.81342       68.95886
+
+ NSTEP =    19000   TIME(PS) =     238.000  TEMP(K) =   300.80  PRESS =   198.4
+ Etot   =   -116454.3806  EKtot   =     28547.3964  EPtot      =   -145001.7770
+ BOND   =       990.0184  ANGLE   =      2704.4722  DIHED      =      4170.9566
+ 1-4 NB =      1206.7745  1-4 EEL =     14024.4432  VDWAALS    =     16701.8987
+ EELEC  =   -184800.3407  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12401.8391  VIRIAL  =     10415.0813  VOLUME     =    463743.1338
+                                                    Density    =         1.0248
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.32284       39.82627       68.98112
+
+ NSTEP =    19500   TIME(PS) =     239.000  TEMP(K) =   297.96  PRESS =  -119.9
+ Etot   =   -116779.1484  EKtot   =     28277.8926  EPtot      =   -145057.0410
+ BOND   =       981.0762  ANGLE   =      2613.4629  DIHED      =      4151.8794
+ 1-4 NB =      1239.2921  1-4 EEL =     14044.6347  VDWAALS    =     16678.2440
+ EELEC  =   -184765.6303  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12411.7315  VIRIAL  =     13613.2685  VOLUME     =    464205.5343
+                                                    Density    =         1.0238
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    20000
+check COM velocity, temp:        0.003949     0.02(Removed)
+wrapping first mol.:      -56.32757       39.82961       68.98691
+wrapping first mol.:      -56.32757       39.82961       68.98691
+
+ NSTEP =    20000   TIME(PS) =     240.000  TEMP(K) =   301.28  PRESS =     0.8
+ Etot   =   -116784.2911  EKtot   =     28593.4890  EPtot      =   -145377.7801
+ BOND   =       929.7774  ANGLE   =      2626.6489  DIHED      =      4128.3736
+ 1-4 NB =      1250.2695  1-4 EEL =     14071.4526  VDWAALS    =     17038.0461
+ EELEC  =   -185422.3483  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12455.5462  VIRIAL  =     12447.4501  VOLUME     =    464317.4985
+                                                    Density    =         1.0235
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.32522       39.82796       68.98404
+
+ NSTEP =    20500   TIME(PS) =     241.000  TEMP(K) =   298.39  PRESS =     8.1
+ Etot   =   -116726.7200  EKtot   =     28318.8691  EPtot      =   -145045.5891
+ BOND   =       989.2769  ANGLE   =      2636.0294  DIHED      =      4174.3664
+ 1-4 NB =      1232.5549  1-4 EEL =     13974.5784  VDWAALS    =     16594.9619
+ EELEC  =   -184647.3570  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12280.7060  VIRIAL  =     12199.5136  VOLUME     =    464259.2135
+                                                    Density    =         1.0237
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    21000
+check COM velocity, temp:        0.002094     0.01(Removed)
+wrapping first mol.:      -56.30603       39.81438       68.96053
+
+ NSTEP =    21000   TIME(PS) =     242.000  TEMP(K) =   300.13  PRESS =  -213.4
+ Etot   =   -116735.9842  EKtot   =     28483.8900  EPtot      =   -145219.8742
+ BOND   =       971.3145  ANGLE   =      2636.3912  DIHED      =      4202.5841
+ 1-4 NB =      1207.2965  1-4 EEL =     14026.8786  VDWAALS    =     16498.9865
+ EELEC  =   -184763.3256  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12433.6003  VIRIAL  =     14571.0566  VOLUME     =    463793.8670
+                                                    Density    =         1.0247
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.28151       39.79705       68.93050
+
+ NSTEP =    21500   TIME(PS) =     243.000  TEMP(K) =   299.42  PRESS =   -76.4
+ Etot   =   -116593.4494  EKtot   =     28416.8789  EPtot      =   -145010.3283
+ BOND   =       988.2453  ANGLE   =      2702.7230  DIHED      =      4165.4470
+ 1-4 NB =      1185.5500  1-4 EEL =     13972.3184  VDWAALS    =     16752.3297
+ EELEC  =   -184776.9418  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12467.1671  VIRIAL  =     13231.1823  VOLUME     =    463182.6421
+                                                    Density    =         1.0260
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    22000
+check COM velocity, temp:        0.002953     0.01(Removed)
+wrapping first mol.:      -56.28636       39.80048       68.93644
+
+ NSTEP =    22000   TIME(PS) =     244.000  TEMP(K) =   297.77  PRESS =   -79.6
+ Etot   =   -116599.3286  EKtot   =     28260.2920  EPtot      =   -144859.6206
+ BOND   =       985.0180  ANGLE   =      2613.3827  DIHED      =      4139.2476
+ 1-4 NB =      1219.7936  1-4 EEL =     14019.4649  VDWAALS    =     16744.9681
+ EELEC  =   -184581.4956  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12313.7232  VIRIAL  =     13109.6331  VOLUME     =    463302.5548
+                                                    Density    =         1.0258
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.30132       39.81105       68.95476
+
+ NSTEP =    22500   TIME(PS) =     245.000  TEMP(K) =   298.62  PRESS =    23.4
+ Etot   =   -116458.7185  EKtot   =     28340.5449  EPtot      =   -144799.2634
+ BOND   =       984.6225  ANGLE   =      2634.2076  DIHED      =      4154.6227
+ 1-4 NB =      1251.0966  1-4 EEL =     14020.0634  VDWAALS    =     16717.1011
+ EELEC  =   -184560.9772  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12395.7649  VIRIAL  =     12161.9596  VOLUME     =    463667.6225
+                                                    Density    =         1.0250
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    23000
+check COM velocity, temp:        0.000971     0.00(Removed)
+wrapping first mol.:      -56.30797       39.81575       68.96290
+
+ NSTEP =    23000   TIME(PS) =     246.000  TEMP(K) =   300.44  PRESS =  -141.3
+ Etot   =   -116465.1996  EKtot   =     28513.2254  EPtot      =   -144978.4249
+ BOND   =       981.2591  ANGLE   =      2680.3642  DIHED      =      4149.2428
+ 1-4 NB =      1218.7685  1-4 EEL =     13975.6689  VDWAALS    =     16540.4895
+ EELEC  =   -184524.2179  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12515.3396  VIRIAL  =     13930.4371  VOLUME     =    463838.8240
+                                                    Density    =         1.0246
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.31480       39.82059       68.97128
+
+ NSTEP =    23500   TIME(PS) =     247.000  TEMP(K) =   301.62  PRESS =     2.9
+ Etot   =   -116482.7961  EKtot   =     28625.3828  EPtot      =   -145108.1790
+ BOND   =       996.9629  ANGLE   =      2616.5427  DIHED      =      4172.9178
+ 1-4 NB =      1223.2718  1-4 EEL =     13961.8540  VDWAALS    =     16709.6101
+ EELEC  =   -184789.3383  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12432.9443  VIRIAL  =     12403.8210  VOLUME     =    464001.8247
+                                                    Density    =         1.0242
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    24000
+check COM velocity, temp:        0.002916     0.01(Removed)
+wrapping first mol.:      -56.31646       39.82176       68.97331
+
+ NSTEP =    24000   TIME(PS) =     248.000  TEMP(K) =   300.98  PRESS =    90.8
+ Etot   =   -116482.2913  EKtot   =     28565.2746  EPtot      =   -145047.5659
+ BOND   =      1021.2347  ANGLE   =      2587.9515  DIHED      =      4155.8085
+ 1-4 NB =      1219.3873  1-4 EEL =     13987.5428  VDWAALS    =     16886.9518
+ EELEC  =   -184906.4425  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12395.6235  VIRIAL  =     11485.6906  VOLUME     =    464039.1189
+                                                    Density    =         1.0241
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.32321       39.82653       68.98157
+
+ NSTEP =    24500   TIME(PS) =     249.000  TEMP(K) =   300.23  PRESS =   -21.8
+ Etot   =   -116520.2802  EKtot   =     28493.7285  EPtot      =   -145014.0087
+ BOND   =      1007.4987  ANGLE   =      2650.1339  DIHED      =      4189.8120
+ 1-4 NB =      1211.6143  1-4 EEL =     14009.4162  VDWAALS    =     16580.6213
+ EELEC  =   -184663.1051  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12303.7086  VIRIAL  =     12521.8828  VOLUME     =    464210.6143
+                                                    Density    =         1.0238
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    25000
+check COM velocity, temp:        0.002449     0.01(Removed)
+wrapping first mol.:      -56.33612       39.83566       68.99738
+wrapping first mol.:      -56.33612       39.83566       68.99738
+
+ NSTEP =    25000   TIME(PS) =     250.000  TEMP(K) =   299.56  PRESS =    30.1
+ Etot   =   -116514.5581  EKtot   =     28430.4484  EPtot      =   -144945.0065
+ BOND   =       975.2645  ANGLE   =      2666.8152  DIHED      =      4207.6097
+ 1-4 NB =      1214.9766  1-4 EEL =     13959.2064  VDWAALS    =     16722.8271
+ EELEC  =   -184691.7060  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12362.6203  VIRIAL  =     12060.9627  VOLUME     =    464527.7833
+                                                    Density    =         1.0231
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.38501       39.87023       69.05727
+
+ NSTEP =    25500   TIME(PS) =     251.000  TEMP(K) =   299.48  PRESS =    54.8
+ Etot   =   -116403.3219  EKtot   =     28422.8438  EPtot      =   -144826.1656
+ BOND   =      1010.9674  ANGLE   =      2707.5204  DIHED      =      4158.5346
+ 1-4 NB =      1211.5298  1-4 EEL =     13943.7100  VDWAALS    =     16762.1800
+ EELEC  =   -184620.6077  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12446.2018  VIRIAL  =     11894.9467  VOLUME     =    465737.2783
+                                                    Density    =         1.0204
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    26000
+check COM velocity, temp:        0.000824     0.00(Removed)
+wrapping first mol.:      -56.36315       39.85477       69.03049
+
+ NSTEP =    26000   TIME(PS) =     252.000  TEMP(K) =   297.96  PRESS =   -50.6
+ Etot   =   -116418.7392  EKtot   =     28278.6233  EPtot      =   -144697.3625
+ BOND   =       985.3129  ANGLE   =      2630.9270  DIHED      =      4171.4509
+ 1-4 NB =      1194.7860  1-4 EEL =     14006.5725  VDWAALS    =     16627.9250
+ EELEC  =   -184314.3369  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12299.1537  VIRIAL  =     12807.6979  VOLUME     =    465200.0722
+                                                    Density    =         1.0216
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.33081       39.83190       68.99088
+
+ NSTEP =    26500   TIME(PS) =     253.000  TEMP(K) =   300.17  PRESS =    14.1
+ Etot   =   -116372.8107  EKtot   =     28487.9863  EPtot      =   -144860.7970
+ BOND   =       995.8404  ANGLE   =      2690.8615  DIHED      =      4167.7670
+ 1-4 NB =      1209.4803  1-4 EEL =     13986.9419  VDWAALS    =     16832.5068
+ EELEC  =   -184744.1949  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12407.4718  VIRIAL  =     12265.6410  VOLUME     =    464397.0503
+                                                    Density    =         1.0234
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    27000
+check COM velocity, temp:        0.003729     0.02(Removed)
+wrapping first mol.:      -56.34574       39.84246       69.00917
+
+ NSTEP =    27000   TIME(PS) =     254.000  TEMP(K) =   300.03  PRESS =   163.7
+ Etot   =   -116369.7244  EKtot   =     28474.7222  EPtot      =   -144844.4466
+ BOND   =       974.0775  ANGLE   =      2656.7039  DIHED      =      4215.4417
+ 1-4 NB =      1217.5687  1-4 EEL =     13962.1518  VDWAALS    =     16498.7205
+ EELEC  =   -184369.1107  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12357.2113  VIRIAL  =     10714.8748  VOLUME     =    464760.2736
+                                                    Density    =         1.0226
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.35776       39.85096       69.02389
+
+ NSTEP =    27500   TIME(PS) =     255.000  TEMP(K) =   298.74  PRESS =   -90.1
+ Etot   =   -116556.1458  EKtot   =     28352.1445  EPtot      =   -144908.2904
+ BOND   =       975.8789  ANGLE   =      2668.9252  DIHED      =      4210.7354
+ 1-4 NB =      1242.2268  1-4 EEL =     14011.0603  VDWAALS    =     16545.1243
+ EELEC  =   -184562.2412  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12323.5342  VIRIAL  =     13228.4875  VOLUME     =    465068.3320
+                                                    Density    =         1.0219
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    28000
+check COM velocity, temp:        0.000717     0.00(Removed)
+wrapping first mol.:      -56.38746       39.87196       69.06026
+
+ NSTEP =    28000   TIME(PS) =     256.000  TEMP(K) =   299.70  PRESS =   -55.5
+ Etot   =   -116548.7446  EKtot   =     28443.5352  EPtot      =   -144992.2798
+ BOND   =       982.6627  ANGLE   =      2656.7096  DIHED      =      4207.1798
+ 1-4 NB =      1220.7665  1-4 EEL =     13986.2841  VDWAALS    =     16886.7843
+ EELEC  =   -184932.6669  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12318.5617  VIRIAL  =     12876.9106  VOLUME     =    465802.4047
+                                                    Density    =         1.0203
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.34438       39.84150       69.00750
+
+ NSTEP =    28500   TIME(PS) =     257.000  TEMP(K) =   298.50  PRESS =  -129.0
+ Etot   =   -116772.6597  EKtot   =     28329.0742  EPtot      =   -145101.7340
+ BOND   =       982.0907  ANGLE   =      2661.8562  DIHED      =      4169.1231
+ 1-4 NB =      1212.7872  1-4 EEL =     13971.1252  VDWAALS    =     16382.6792
+ EELEC  =   -184481.3956  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12366.2537  VIRIAL  =     13660.8989  VOLUME     =    464738.7625
+                                                    Density    =         1.0226
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    29000
+check COM velocity, temp:        0.002780     0.01(Removed)
+wrapping first mol.:      -56.34068       39.83888       69.00297
+
+ NSTEP =    29000   TIME(PS) =     258.000  TEMP(K) =   300.65  PRESS =   -67.7
+ Etot   =   -116778.2715  EKtot   =     28533.9426  EPtot      =   -145312.2141
+ BOND   =       983.0387  ANGLE   =      2615.6647  DIHED      =      4171.3632
+ 1-4 NB =      1234.3866  1-4 EEL =     14050.4431  VDWAALS    =     16638.6870
+ EELEC  =   -185005.7976  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12500.0893  VIRIAL  =     13178.8531  VOLUME     =    464644.6250
+                                                    Density    =         1.0228
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.32198       39.82567       68.98007
+
+ NSTEP =    29500   TIME(PS) =     259.000  TEMP(K) =   300.52  PRESS =   -43.8
+ Etot   =   -116787.0953  EKtot   =     28521.4746  EPtot      =   -145308.5699
+ BOND   =       949.2396  ANGLE   =      2650.5604  DIHED      =      4208.7716
+ 1-4 NB =      1224.6334  1-4 EEL =     14033.0138  VDWAALS    =     16841.7966
+ EELEC  =   -185216.5853  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12413.5346  VIRIAL  =     12852.5185  VOLUME     =    464181.2380
+                                                    Density    =         1.0238
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    30000
+check COM velocity, temp:        0.002442     0.01(Removed)
+wrapping first mol.:      -56.30115       39.81093       68.95456
+wrapping first mol.:      -56.30115       39.81093       68.95456
+
+ NSTEP =    30000   TIME(PS) =     260.000  TEMP(K) =   301.68  PRESS =   119.1
+ Etot   =   -116798.4166  EKtot   =     28631.7414  EPtot      =   -145430.1580
+ BOND   =       982.4294  ANGLE   =      2635.6730  DIHED      =      4177.0830
+ 1-4 NB =      1216.4087  1-4 EEL =     13948.5661  VDWAALS    =     16746.9916
+ EELEC  =   -185137.3099  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12483.8583  VIRIAL  =     11291.1084  VOLUME     =    463659.6233
+                                                    Density    =         1.0250
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.28978       39.80289       68.94062
+
+ NSTEP =    30500   TIME(PS) =     261.000  TEMP(K) =   299.10  PRESS =    79.5
+ Etot   =   -116969.2440  EKtot   =     28386.7910  EPtot      =   -145356.0350
+ BOND   =      1001.2839  ANGLE   =      2666.6973  DIHED      =      4168.4757
+ 1-4 NB =      1226.5294  1-4 EEL =     14018.2195  VDWAALS    =     16976.2199
+ EELEC  =   -185413.4607  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12346.7691  VIRIAL  =     11551.7100  VOLUME     =    463380.2895
+                                                    Density    =         1.0256
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    31000
+check COM velocity, temp:        0.001650     0.00(Removed)
+wrapping first mol.:      -56.30184       39.81142       68.95540
+
+ NSTEP =    31000   TIME(PS) =     262.000  TEMP(K) =   299.47  PRESS =  -174.4
+ Etot   =   -116972.4315  EKtot   =     28422.0406  EPtot      =   -145394.4720
+ BOND   =       978.2413  ANGLE   =      2617.2909  DIHED      =      4165.4794
+ 1-4 NB =      1223.7851  1-4 EEL =     13965.4101  VDWAALS    =     16760.9701
+ EELEC  =   -185105.6489  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12293.0807  VIRIAL  =     14038.6240  VOLUME     =    463688.8906
+                                                    Density    =         1.0249
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.29146       39.80408       68.94269
+
+ NSTEP =    31500   TIME(PS) =     263.000  TEMP(K) =   298.82  PRESS =   116.7
+ Etot   =   -116710.8464  EKtot   =     28360.2109  EPtot      =   -145071.0574
+ BOND   =       964.5025  ANGLE   =      2704.5974  DIHED      =      4170.6349
+ 1-4 NB =      1203.9091  1-4 EEL =     13975.0223  VDWAALS    =     16993.8816
+ EELEC  =   -185083.6052  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12345.3672  VIRIAL  =     11177.8623  VOLUME     =    463420.4101
+                                                    Density    =         1.0255
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    32000
+check COM velocity, temp:        0.001420     0.00(Removed)
+wrapping first mol.:      -56.30745       39.81539       68.96228
+
+ NSTEP =    32000   TIME(PS) =     264.000  TEMP(K) =   298.51  PRESS =   -66.0
+ Etot   =   -116707.7842  EKtot   =     28330.7738  EPtot      =   -145038.5581
+ BOND   =       954.0818  ANGLE   =      2618.3647  DIHED      =      4160.0622
+ 1-4 NB =      1249.3985  1-4 EEL =     13989.8623  VDWAALS    =     16637.1193
+ EELEC  =   -184647.4468  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12324.9416  VIRIAL  =     12986.3167  VOLUME     =    463823.0302
+                                                    Density    =         1.0246
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.31874       39.82337       68.97609
+
+ NSTEP =    32500   TIME(PS) =     265.000  TEMP(K) =   298.88  PRESS =    14.0
+ Etot   =   -116724.0886  EKtot   =     28365.2598  EPtot      =   -145089.3483
+ BOND   =       954.4120  ANGLE   =      2625.6433  DIHED      =      4193.6950
+ 1-4 NB =      1223.8485  1-4 EEL =     14014.5749  VDWAALS    =     16612.5917
+ EELEC  =   -184714.1138  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12464.4126  VIRIAL  =     12323.7705  VOLUME     =    464098.5433
+                                                    Density    =         1.0240
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    33000
+check COM velocity, temp:        0.001585     0.00(Removed)
+wrapping first mol.:      -56.35561       39.84944       69.02125
+
+ NSTEP =    33000   TIME(PS) =     266.000  TEMP(K) =   298.02  PRESS =    75.3
+ Etot   =   -116709.2136  EKtot   =     28284.0762  EPtot      =   -144993.2898
+ BOND   =       975.1801  ANGLE   =      2688.3814  DIHED      =      4173.2328
+ 1-4 NB =      1235.7936  1-4 EEL =     14020.7586  VDWAALS    =     16871.2669
+ EELEC  =   -184957.9032  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12404.9984  VIRIAL  =     11649.0607  VOLUME     =    465008.1924
+                                                    Density    =         1.0220
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.35139       39.84646       69.01608
+
+ NSTEP =    33500   TIME(PS) =     267.000  TEMP(K) =   302.19  PRESS =    -3.6
+ Etot   =   -116475.2769  EKtot   =     28679.6777  EPtot      =   -145154.9546
+ BOND   =       952.2178  ANGLE   =      2625.3277  DIHED      =      4144.2050
+ 1-4 NB =      1220.7021  1-4 EEL =     14023.0685  VDWAALS    =     16689.0433
+ EELEC  =   -184809.5190  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12524.9641  VIRIAL  =     12561.2800  VOLUME     =    464906.9811
+                                                    Density    =         1.0222
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    34000
+check COM velocity, temp:        0.001463     0.00(Removed)
+wrapping first mol.:      -56.35751       39.85079       69.02359
+
+ NSTEP =    34000   TIME(PS) =     268.000  TEMP(K) =   300.72  PRESS =   -33.4
+ Etot   =   -116478.5255  EKtot   =     28539.9131  EPtot      =   -145018.4386
+ BOND   =       964.3386  ANGLE   =      2698.9056  DIHED      =      4141.9236
+ 1-4 NB =      1229.5622  1-4 EEL =     13980.4344  VDWAALS    =     16810.5279
+ EELEC  =   -184844.1309  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12544.0852  VIRIAL  =     12879.6531  VOLUME     =    465059.8599
+                                                    Density    =         1.0219
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.33485       39.83477       68.99583
+
+ NSTEP =    34500   TIME(PS) =     269.000  TEMP(K) =   302.29  PRESS =    77.1
+ Etot   =   -116461.3526  EKtot   =     28689.5332  EPtot      =   -145150.8858
+ BOND   =       996.1827  ANGLE   =      2666.3855  DIHED      =      4176.6001
+ 1-4 NB =      1212.1997  1-4 EEL =     13978.6434  VDWAALS    =     16582.1546
+ EELEC  =   -184763.0517  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12588.8693  VIRIAL  =     11815.2415  VOLUME     =    464494.5265
+                                                    Density    =         1.0231
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    35000
+check COM velocity, temp:        0.001003     0.00(Removed)
+wrapping first mol.:      -56.35232       39.84712       69.01723
+wrapping first mol.:      -56.35232       39.84712       69.01723
+
+ NSTEP =    35000   TIME(PS) =     270.000  TEMP(K) =   297.95  PRESS =    16.5
+ Etot   =   -116455.3062  EKtot   =     28277.7531  EPtot      =   -144733.0593
+ BOND   =      1018.5893  ANGLE   =      2631.1021  DIHED      =      4182.7649
+ 1-4 NB =      1230.1093  1-4 EEL =     14038.6367  VDWAALS    =     16776.3731
+ EELEC  =   -184610.6347  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12286.1511  VIRIAL  =     12120.4972  VOLUME     =    464929.3160
+                                                    Density    =         1.0222
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.34951       39.84513       69.01378
+
+ NSTEP =    35500   TIME(PS) =     271.000  TEMP(K) =   298.05  PRESS =   -15.8
+ Etot   =   -116414.9447  EKtot   =     28286.7324  EPtot      =   -144701.6772
+ BOND   =      1006.1075  ANGLE   =      2633.1368  DIHED      =      4183.1756
+ 1-4 NB =      1185.1123  1-4 EEL =     13934.8747  VDWAALS    =     16625.8181
+ EELEC  =   -184269.9022  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12305.0592  VIRIAL  =     12463.9330  VOLUME     =    464860.8889
+                                                    Density    =         1.0223
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    36000
+check COM velocity, temp:        0.002964     0.01(Removed)
+wrapping first mol.:      -56.36032       39.85277       69.02702
+
+ NSTEP =    36000   TIME(PS) =     272.000  TEMP(K) =   300.89  PRESS =     7.0
+ Etot   =   -116417.5907  EKtot   =     28556.5556  EPtot      =   -144974.1462
+ BOND   =      1038.1147  ANGLE   =      2579.5246  DIHED      =      4170.1861
+ 1-4 NB =      1214.6574  1-4 EEL =     13954.3394  VDWAALS    =     16747.3417
+ EELEC  =   -184678.3102  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12376.7501  VIRIAL  =     12306.6930  VOLUME     =    465127.5838
+                                                    Density    =         1.0218
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.34428       39.84143       69.00738
+
+ NSTEP =    36500   TIME(PS) =     273.000  TEMP(K) =   299.36  PRESS =   -36.5
+ Etot   =   -116693.6752  EKtot   =     28411.0586  EPtot      =   -145104.7338
+ BOND   =       990.6205  ANGLE   =      2578.3502  DIHED      =      4152.2431
+ 1-4 NB =      1247.0625  1-4 EEL =     14054.5733  VDWAALS    =     16495.8329
+ EELEC  =   -184623.4163  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12415.8165  VIRIAL  =     12781.9664  VOLUME     =    464732.4467
+                                                    Density    =         1.0226
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    37000
+check COM velocity, temp:        0.003097     0.01(Removed)
+wrapping first mol.:      -56.34150       39.83946       69.00397
+
+ NSTEP =    37000   TIME(PS) =     274.000  TEMP(K) =   299.81  PRESS =  -100.4
+ Etot   =   -116701.7283  EKtot   =     28454.1652  EPtot      =   -145155.8935
+ BOND   =       953.4285  ANGLE   =      2637.9430  DIHED      =      4129.6718
+ 1-4 NB =      1205.8195  1-4 EEL =     13964.4925  VDWAALS    =     16732.2844
+ EELEC  =   -184779.5333  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12326.9048  VIRIAL  =     13334.6732  VOLUME     =    464666.1780
+                                                    Density    =         1.0228
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.37050       39.85997       69.03948
+
+ NSTEP =    37500   TIME(PS) =     275.000  TEMP(K) =   298.94  PRESS =   107.3
+ Etot   =   -116761.5305  EKtot   =     28371.6211  EPtot      =   -145133.1516
+ BOND   =       969.0665  ANGLE   =      2603.8648  DIHED      =      4181.9406
+ 1-4 NB =      1216.3015  1-4 EEL =     13970.1350  VDWAALS    =     16776.2801
+ EELEC  =   -184850.7400  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12294.8275  VIRIAL  =     11216.9197  VOLUME     =    465375.4339
+                                                    Density    =         1.0212
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    38000
+check COM velocity, temp:        0.003735     0.02(Removed)
+wrapping first mol.:      -56.34514       39.84204       69.00843
+
+ NSTEP =    38000   TIME(PS) =     276.000  TEMP(K) =   296.60  PRESS =   157.0
+ Etot   =   -116769.4759  EKtot   =     28149.0900  EPtot      =   -144918.5660
+ BOND   =       981.0090  ANGLE   =      2605.5625  DIHED      =      4173.5995
+ 1-4 NB =      1230.7008  1-4 EEL =     14004.4258  VDWAALS    =     16903.8298
+ EELEC  =   -184817.6933  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12274.7619  VIRIAL  =     10699.6481  VOLUME     =    464745.6463
+                                                    Density    =         1.0226
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.35618       39.84985       69.02195
+
+ NSTEP =    38500   TIME(PS) =     277.000  TEMP(K) =   302.47  PRESS =   121.5
+ Etot   =   -116379.4148  EKtot   =     28705.8945  EPtot      =   -145085.3093
+ BOND   =       973.2537  ANGLE   =      2621.0675  DIHED      =      4173.7810
+ 1-4 NB =      1213.7209  1-4 EEL =     14010.4315  VDWAALS    =     16855.9935
+ EELEC  =   -184933.5574  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12405.8026  VIRIAL  =     11185.8720  VOLUME     =    465020.4197
+                                                    Density    =         1.0220
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    39000
+check COM velocity, temp:        0.002241     0.01(Removed)
+wrapping first mol.:      -56.32887       39.83054       68.98851
+
+ NSTEP =    39000   TIME(PS) =     278.000  TEMP(K) =   301.15  PRESS =   -78.0
+ Etot   =   -116392.0370  EKtot   =     28580.7420  EPtot      =   -144972.7790
+ BOND   =      1006.7991  ANGLE   =      2634.1036  DIHED      =      4171.4268
+ 1-4 NB =      1224.5772  1-4 EEL =     14006.2920  VDWAALS    =     16488.7156
+ EELEC  =   -184504.6933  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12379.0298  VIRIAL  =     13160.9752  VOLUME     =    464353.0481
+                                                    Density    =         1.0235
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.36287       39.85458       69.03014
+
+ NSTEP =    39500   TIME(PS) =     279.000  TEMP(K) =   300.40  PRESS =   147.6
+ Etot   =   -116423.6411  EKtot   =     28510.1914  EPtot      =   -144933.8325
+ BOND   =       977.8855  ANGLE   =      2717.7685  DIHED      =      4191.7600
+ 1-4 NB =      1228.9900  1-4 EEL =     14011.0148  VDWAALS    =     16713.3546
+ EELEC  =   -184774.6059  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12463.2317  VIRIAL  =     10980.7467  VOLUME     =    465184.8956
+                                                    Density    =         1.0216
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    40000
+check COM velocity, temp:        0.003256     0.02(Removed)
+wrapping first mol.:      -56.34933       39.84500       69.01357
+wrapping first mol.:      -56.34933       39.84500       69.01357
+
+ NSTEP =    40000   TIME(PS) =     280.000  TEMP(K) =   301.11  PRESS =    14.8
+ Etot   =   -116432.7706  EKtot   =     28577.0958  EPtot      =   -145009.8664
+ BOND   =       956.1613  ANGLE   =      2667.3464  DIHED      =      4154.2909
+ 1-4 NB =      1223.7288  1-4 EEL =     13939.7421  VDWAALS    =     16729.3931
+ EELEC  =   -184680.5290  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12456.7910  VIRIAL  =     12308.5655  VOLUME     =    464855.3562
+                                                    Density    =         1.0224
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.33964       39.83815       69.00169
+
+ NSTEP =    40500   TIME(PS) =     281.000  TEMP(K) =   299.33  PRESS =  -124.0
+ Etot   =   -116305.5646  EKtot   =     28408.7480  EPtot      =   -144714.3127
+ BOND   =      1004.7152  ANGLE   =      2641.8082  DIHED      =      4216.0474
+ 1-4 NB =      1256.1739  1-4 EEL =     14021.0007  VDWAALS    =     16532.5882
+ EELEC  =   -184386.6463  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12267.2450  VIRIAL  =     13511.0033  VOLUME     =    464621.2172
+                                                    Density    =         1.0229
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    41000
+check COM velocity, temp:        0.004281     0.03(Removed)
+wrapping first mol.:      -56.36728       39.85769       69.03554
+
+ NSTEP =    41000   TIME(PS) =     282.000  TEMP(K) =   299.22  PRESS =    14.1
+ Etot   =   -116298.4367  EKtot   =     28397.6240  EPtot      =   -144696.0607
+ BOND   =      1037.5011  ANGLE   =      2647.3885  DIHED      =      4178.1283
+ 1-4 NB =      1201.8933  1-4 EEL =     13988.2141  VDWAALS    =     16962.0058
+ EELEC  =   -184711.1919  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12290.3095  VIRIAL  =     12148.6322  VOLUME     =    465299.5938
+                                                    Density    =         1.0214
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.35878       39.85168       69.02513
+
+ NSTEP =    41500   TIME(PS) =     283.000  TEMP(K) =   303.58  PRESS =   101.9
+ Etot   =   -116107.7840  EKtot   =     28811.4238  EPtot      =   -144919.2078
+ BOND   =      1013.6245  ANGLE   =      2607.0873  DIHED      =      4176.1447
+ 1-4 NB =      1220.2303  1-4 EEL =     13976.8371  VDWAALS    =     16771.6997
+ EELEC  =   -184684.8314  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12508.4946  VIRIAL  =     11485.1494  VOLUME     =    465085.5266
+                                                    Density    =         1.0218
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    42000
+check COM velocity, temp:        0.002089     0.01(Removed)
+wrapping first mol.:      -56.35215       39.84700       69.01702
+
+ NSTEP =    42000   TIME(PS) =     284.000  TEMP(K) =   302.10  PRESS =   291.8
+ Etot   =   -116117.1529  EKtot   =     28671.2054  EPtot      =   -144788.3583
+ BOND   =       999.8811  ANGLE   =      2618.2751  DIHED      =      4174.1403
+ 1-4 NB =      1239.4646  1-4 EEL =     13978.0576  VDWAALS    =     16909.2469
+ EELEC  =   -184707.4239  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12503.3072  VIRIAL  =      9574.3929  VOLUME     =    464913.5733
+                                                    Density    =         1.0222
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.34308       39.84058       69.00591
+
+ NSTEP =    42500   TIME(PS) =     285.000  TEMP(K) =   302.58  PRESS =    48.8
+ Etot   =   -116197.8458  EKtot   =     28716.6641  EPtot      =   -144914.5099
+ BOND   =      1000.2495  ANGLE   =      2654.3276  DIHED      =      4187.2709
+ 1-4 NB =      1228.4196  1-4 EEL =     13973.1821  VDWAALS    =     16682.4334
+ EELEC  =   -184640.3930  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12428.8729  VIRIAL  =     11939.3311  VOLUME     =    464699.2800
+                                                    Density    =         1.0227
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    43000
+check COM velocity, temp:        0.001882     0.01(Removed)
+wrapping first mol.:      -56.32668       39.82899       68.98583
+
+ NSTEP =    43000   TIME(PS) =     286.000  TEMP(K) =   300.68  PRESS =  -257.9
+ Etot   =   -116210.9250  EKtot   =     28536.6634  EPtot      =   -144747.5884
+ BOND   =      1023.3830  ANGLE   =      2647.5209  DIHED      =      4183.4155
+ 1-4 NB =      1218.8073  1-4 EEL =     13918.5316  VDWAALS    =     16337.4135
+ EELEC  =   -184076.6602  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12388.9688  VIRIAL  =     14974.5530  VOLUME     =    464306.3330
+                                                    Density    =         1.0236
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.35394       39.84826       69.01921
+
+ NSTEP =    43500   TIME(PS) =     287.000  TEMP(K) =   303.50  PRESS =   211.0
+ Etot   =   -116376.4501  EKtot   =     28804.0996  EPtot      =   -145180.5498
+ BOND   =      1009.8337  ANGLE   =      2617.9611  DIHED      =      4162.9955
+ 1-4 NB =      1233.2024  1-4 EEL =     13986.5087  VDWAALS    =     16858.2468
+ EELEC  =   -185049.2979  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12618.2127  VIRIAL  =     10499.7724  VOLUME     =    464961.1964
+                                                    Density    =         1.0221
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    44000
+check COM velocity, temp:        0.000767     0.00(Removed)
+wrapping first mol.:      -56.34623       39.84281       69.00977
+
+ NSTEP =    44000   TIME(PS) =     288.000  TEMP(K) =   300.15  PRESS =    28.9
+ Etot   =   -116387.9294  EKtot   =     28485.9692  EPtot      =   -144873.8985
+ BOND   =       961.5693  ANGLE   =      2618.2454  DIHED      =      4178.1099
+ 1-4 NB =      1220.7056  1-4 EEL =     14029.1985  VDWAALS    =     16652.1145
+ EELEC  =   -184533.8417  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12420.1573  VIRIAL  =     12130.4262  VOLUME     =    464778.0242
+                                                    Density    =         1.0225
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.34839       39.84434       69.01241
+
+ NSTEP =    44500   TIME(PS) =     289.000  TEMP(K) =   300.70  PRESS =    12.9
+ Etot   =   -116636.4387  EKtot   =     28537.8906  EPtot      =   -145174.3293
+ BOND   =      1049.3109  ANGLE   =      2603.0892  DIHED      =      4157.2698
+ 1-4 NB =      1197.4902  1-4 EEL =     13951.7979  VDWAALS    =     16626.0224
+ EELEC  =   -184759.3099  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12429.6462  VIRIAL  =     12299.8964  VOLUME     =    464832.1638
+                                                    Density    =         1.0224
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    45000
+check COM velocity, temp:        0.000915     0.00(Removed)
+wrapping first mol.:      -56.33455       39.83455       68.99546
+wrapping first mol.:      -56.33455       39.83455       68.99546
+
+ NSTEP =    45000   TIME(PS) =     290.000  TEMP(K) =   299.34  PRESS =   117.4
+ Etot   =   -116644.4848  EKtot   =     28409.0216  EPtot      =   -145053.5064
+ BOND   =      1000.9367  ANGLE   =      2594.8152  DIHED      =      4139.3866
+ 1-4 NB =      1232.2597  1-4 EEL =     13996.4625  VDWAALS    =     16929.9540
+ EELEC  =   -184947.3211  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12388.4350  VIRIAL  =     11211.1993  VOLUME     =    464485.2570
+                                                    Density    =         1.0232
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.33604       39.83561       68.99729
+
+ NSTEP =    45500   TIME(PS) =     291.000  TEMP(K) =   301.11  PRESS =  -211.6
+ Etot   =   -116592.9301  EKtot   =     28577.5195  EPtot      =   -145170.4497
+ BOND   =       989.7622  ANGLE   =      2654.6013  DIHED      =      4194.0776
+ 1-4 NB =      1215.5739  1-4 EEL =     13945.6197  VDWAALS    =     16611.3784
+ EELEC  =   -184781.4628  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12412.4071  VIRIAL  =     14534.6319  VOLUME     =    464535.8720
+                                                    Density    =         1.0231
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    46000
+check COM velocity, temp:        0.003012     0.01(Removed)
+wrapping first mol.:      -56.35101       39.84619       69.01562
+
+ NSTEP =    46000   TIME(PS) =     292.000  TEMP(K) =   301.56  PRESS =   -80.2
+ Etot   =   -116591.0534  EKtot   =     28620.1102  EPtot      =   -145211.1635
+ BOND   =      1010.3869  ANGLE   =      2628.3619  DIHED      =      4190.4675
+ 1-4 NB =      1203.4193  1-4 EEL =     13949.7124  VDWAALS    =     16945.6040
+ EELEC  =   -185139.1155  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12421.3732  VIRIAL  =     13226.7439  VOLUME     =    464900.7542
+                                                    Density    =         1.0223
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.32655       39.82890       68.98567
+
+ NSTEP =    46500   TIME(PS) =     293.000  TEMP(K) =   300.38  PRESS =    96.5
+ Etot   =   -116684.8216  EKtot   =     28507.7812  EPtot      =   -145192.6028
+ BOND   =       973.5903  ANGLE   =      2698.8345  DIHED      =      4179.5446
+ 1-4 NB =      1219.1025  1-4 EEL =     13984.8700  VDWAALS    =     16769.1595
+ EELEC  =   -185017.7043  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12366.8669  VIRIAL  =     11399.6393  VOLUME     =    464288.4116
+                                                    Density    =         1.0236
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    47000
+check COM velocity, temp:        0.001139     0.00(Removed)
+wrapping first mol.:      -56.30792       39.81572       68.96284
+
+ NSTEP =    47000   TIME(PS) =     294.000  TEMP(K) =   300.48  PRESS =  -118.0
+ Etot   =   -116695.4361  EKtot   =     28517.7314  EPtot      =   -145213.1675
+ BOND   =       997.7377  ANGLE   =      2663.5717  DIHED      =      4202.6340
+ 1-4 NB =      1221.8087  1-4 EEL =     13967.2780  VDWAALS    =     16784.1228
+ EELEC  =   -185050.3205  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12488.6392  VIRIAL  =     13670.3752  VOLUME     =    463836.6283
+                                                    Density    =         1.0246
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.30952       39.81685       68.96481
+
+ NSTEP =    47500   TIME(PS) =     295.000  TEMP(K) =   299.00  PRESS =    46.9
+ Etot   =   -116665.3301  EKtot   =     28376.7773  EPtot      =   -145042.1074
+ BOND   =      1038.1048  ANGLE   =      2668.7338  DIHED      =      4181.3964
+ 1-4 NB =      1202.1025  1-4 EEL =     13961.4816  VDWAALS    =     16758.3322
+ EELEC  =   -184852.2587  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12384.3943  VIRIAL  =     11914.4118  VOLUME     =    463869.4342
+                                                    Density    =         1.0245
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    48000
+check COM velocity, temp:        0.001705     0.00(Removed)
+wrapping first mol.:      -56.29774       39.80852       68.95037
+
+ NSTEP =    48000   TIME(PS) =     296.000  TEMP(K) =   299.40  PRESS =   203.1
+ Etot   =   -116672.5401  EKtot   =     28415.1317  EPtot      =   -145087.6718
+ BOND   =      1001.8413  ANGLE   =      2673.9115  DIHED      =      4197.4019
+ 1-4 NB =      1248.3548  1-4 EEL =     14023.4212  VDWAALS    =     16935.6350
+ EELEC  =   -185168.2375  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12405.7291  VIRIAL  =     10373.3028  VOLUME     =    463571.7677
+                                                    Density    =         1.0252
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.30398       39.81294       68.95802
+
+ NSTEP =    48500   TIME(PS) =     297.000  TEMP(K) =   299.82  PRESS =   156.4
+ Etot   =   -116517.9603  EKtot   =     28455.1133  EPtot      =   -144973.0736
+ BOND   =       988.5075  ANGLE   =      2691.5664  DIHED      =      4197.6010
+ 1-4 NB =      1230.5016  1-4 EEL =     14022.3787  VDWAALS    =     16755.6676
+ EELEC  =   -184859.2963  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12317.0197  VIRIAL  =     10750.8968  VOLUME     =    463728.0630
+                                                    Density    =         1.0248
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    49000
+check COM velocity, temp:        0.002020     0.01(Removed)
+wrapping first mol.:      -56.30746       39.81539       68.96228
+
+ NSTEP =    49000   TIME(PS) =     298.000  TEMP(K) =   299.95  PRESS =    75.7
+ Etot   =   -116517.3040  EKtot   =     28467.1665  EPtot      =   -144984.4706
+ BOND   =       975.3851  ANGLE   =      2637.4158  DIHED      =      4183.6404
+ 1-4 NB =      1251.9533  1-4 EEL =     14042.0280  VDWAALS    =     16808.1610
+ EELEC  =   -184883.0542  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12392.3675  VIRIAL  =     11633.8957  VOLUME     =    463817.2626
+                                                    Density    =         1.0246
+ ------------------------------------------------------------------------------
+
+check COM velocity, temp:        0.000000     0.00(Removed)
+wrapping first mol.:      -56.35798       39.85112       69.02416
+
+ NSTEP =    49500   TIME(PS) =     299.000  TEMP(K) =   300.40  PRESS =   216.0
+ Etot   =   -116249.2285  EKtot   =     28509.8184  EPtot      =   -144759.0468
+ BOND   =       982.6897  ANGLE   =      2725.6904  DIHED      =      4192.1813
+ 1-4 NB =      1222.6931  1-4 EEL =     13963.6325  VDWAALS    =     16809.8340
+ EELEC  =   -184655.7679  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12490.4224  VIRIAL  =     10321.9250  VOLUME     =    465061.1033
+                                                    Density    =         1.0219
+ ------------------------------------------------------------------------------
+
+Setting new random velocities at step    50000
+check COM velocity, temp:        0.002321     0.01(Removed)
+wrapping first mol.:      -56.35212       39.84698       69.01698
+wrapping first mol.:      -56.35212       39.84698       69.01698
+
+ NSTEP =    50000   TIME(PS) =     300.000  TEMP(K) =   300.09  PRESS =    29.1
+ Etot   =   -116250.8079  EKtot   =     28480.7923  EPtot      =   -144731.6003
+ BOND   =       998.9883  ANGLE   =      2683.3915  DIHED      =      4178.3122
+ 1-4 NB =      1226.1226  1-4 EEL =     14028.8643  VDWAALS    =     16785.6109
+ EELEC  =   -184632.8901  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12483.3090  VIRIAL  =     12191.6766  VOLUME     =    464923.7629
+                                                    Density    =         1.0222
+ ------------------------------------------------------------------------------
+
+
+      A V E R A G E S   O V E R     100 S T E P S
+
+
+ NSTEP =    50000   TIME(PS) =     300.000  TEMP(K) =   299.80  PRESS =     4.1
+ Etot   =   -116595.8325  EKtot   =     28452.8648  EPtot      =   -145048.6973
+ BOND   =       991.8250  ANGLE   =      2649.2036  DIHED      =      4178.7925
+ 1-4 NB =      1220.8939  1-4 EEL =     13994.6499  VDWAALS    =     16733.2766
+ EELEC  =   -184817.3388  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =     12396.2665  VIRIAL  =     12355.2725  VOLUME     =    464299.7455
+                                                    Density    =         1.0236
+ ------------------------------------------------------------------------------
+
+
+      R M S  F L U C T U A T I O N S
+
+
+ NSTEP =    50000   TIME(PS) =     300.000  TEMP(K) =     1.37  PRESS =   111.6
+ Etot   =       188.8839  EKtot   =       129.8112  EPtot      =       176.2829
+ BOND   =        26.6095  ANGLE   =        35.7468  DIHED      =        19.7263
+ 1-4 NB =        16.0533  1-4 EEL =        34.3728  VDWAALS    =       155.2023
+ EELEC  =       251.0513  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EKCMT  =        82.5729  VIRIAL  =      1108.0850  VOLUME     =       600.4990
+                                                    Density    =         0.0013
+ ------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+   5.  TIMINGS
+--------------------------------------------------------------------------------
+
+|  NonSetup CPU Time in Major Routines:
+|
+|     Routine           Sec        %
+|     ------------------------------
+|     Nonbond          44.16   62.29
+|     Bond              0.00    0.00
+|     Angle             0.00    0.00
+|     Dihedral          0.00    0.00
+|     Shake             0.24    0.34
+|     RunMD            26.39   37.23
+|     Other             0.09    0.13
+|     ------------------------------
+|     Total            70.88
+
+|  PME Nonbond Pairlist CPU Time:
+|
+|     Routine              Sec        %
+|     ---------------------------------
+|     Set Up Cit           0.00    0.00
+|     Build List           0.00    0.00
+|     ---------------------------------
+|     Total                0.00    0.00
+
+|  PME Direct Force CPU Time:
+|
+|     Routine              Sec        %
+|     ---------------------------------
+|     NonBonded Calc       0.00    0.00
+|     Exclude Masked       0.00    0.00
+|     Other                0.06    0.08
+|     ---------------------------------
+|     Total                0.06    0.08
+
+|  PME Reciprocal Force CPU Time:
+|
+|     Routine              Sec        %
+|     ---------------------------------
+|     1D bspline           0.00    0.00
+|     Grid Charges         0.00    0.00
+|     Scalar Sum           0.00    0.00
+|     Gradient Sum         0.00    0.00
+|     FFT                  0.00    0.00
+|     ---------------------------------
+|     Total                0.00    0.00
+
+|  Final Performance Info:
+|     -----------------------------------------------------
+|     Average timings for last    7000 steps:
+|     Elapsed(s) =       9.90 Per Step(ms) =       1.41
+|         ns/day =     122.13   seconds/ns =     707.46
+|
+|     Average timings for all steps:
+|     Elapsed(s) =      70.86 Per Step(ms) =       1.42
+|         ns/day =     121.93   seconds/ns =     708.60
+|     -----------------------------------------------------
+
+|  Setup CPU time:            0.62 seconds
+|  NonSetup CPU time:        70.88 seconds
+|  Total CPU time:           71.51 seconds     0.02 hours
+
+|  Setup wall time:           0    seconds
+|  NonSetup wall time:       71    seconds
+|  Total wall time:          71    seconds     0.02 hours

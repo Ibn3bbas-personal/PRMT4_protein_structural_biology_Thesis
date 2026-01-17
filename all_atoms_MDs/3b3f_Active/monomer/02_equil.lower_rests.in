@@ -1,0 +1,11 @@
+equil with weaker restraints, 100ps
+ &cntrl
+  imin = 0, irest = 1, ntx = 5,ig=-1,
+  ntb = 1, cut = 9.0, ntc = 2, ntf = 2, ntr = 1,
+  tempi = 300.0, temp0 =  300.0, ntt = 2,
+  nstlim = 50000, dt = 0.002,
+  ntpr = 500, ntwx = 500, ntwr = 5000,
+  iwrap = 1, ioutfm = 1, saltcon = 0.1
+  restraintmask='!:WAT& :1-326@CA,C,O,N,S',restraint_wt=1.0
+ /
+END
